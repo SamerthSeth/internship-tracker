@@ -34,13 +34,21 @@ async def lifespan(app: FastAPI):
     """
     # Startup
     print("Starting up the application...")
-    await init_db()
-    print("Database initialized")
+    try:
+        await init_db()
+        app.state.db_ready = True
+        print("Database initialized")
+    except Exception as exc:
+        app.state.db_ready = False
+        print(f"Database initialization failed: {exc}")
     yield
     # Shutdown
     print("Shutting down the application...")
-    await engine.dispose()
-    print("Database connections closed")
+    try:
+        await engine.dispose()
+        print("Database connections closed")
+    except Exception as exc:
+        print(f"Database shutdown cleanup failed: {exc}")
 
 
 # Create FastAPI app
@@ -88,6 +96,7 @@ async def health_check():
     """
     return {
         "status": "healthy",
+        "database_ready": bool(getattr(app.state, "db_ready", False)),
         "app": settings.APP_NAME,
         "version": "1.0.0"
     }
