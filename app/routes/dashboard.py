@@ -3,7 +3,7 @@ Dashboard routes - Dashboard stats, deadlines, eligibility
 """
 
 from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import HTTPBearer
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core import get_db
@@ -17,7 +17,7 @@ security = HTTPBearer()
 
 @router.get("/stats", response_model=DashboardStats)
 async def get_dashboard_stats(
-    credentials: str = Depends(security),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: AsyncSession = Depends(get_db)
 ):
     """
@@ -40,7 +40,7 @@ async def get_dashboard_stats(
 @router.get("/upcoming-deadlines", response_model=UpcomingDeadlinesResponse)
 async def get_upcoming_deadlines(
     days: int = 7,
-    credentials: str = Depends(security),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: AsyncSession = Depends(get_db)
 ):
     """
@@ -63,7 +63,7 @@ async def get_upcoming_deadlines(
 
 @router.get("/eligibility", response_model=EligibilityCheckResponse)
 async def check_eligibility(
-    credentials: str = Depends(security),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: AsyncSession = Depends(get_db)
 ):
     """

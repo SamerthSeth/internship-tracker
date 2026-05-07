@@ -8,7 +8,8 @@ const Internships = () => {
   const [formData, setFormData] = useState({
     company: '',
     role: '',
-    status: 'APPLIED'
+    start_date: '',
+    is_ongoing: true
   });
 
   const fetchInternships = async () => {
@@ -30,7 +31,7 @@ const Internships = () => {
       await api.post('/internships', formData);
       toast.success('Internship added successfully');
       setIsModalOpen(false);
-      setFormData({ company: '', role: '', status: 'APPLIED' });
+      setFormData({ company: '', role: '', start_date: '', is_ongoing: true });
       fetchInternships();
     } catch (error) {
       toast.error('Failed to add internship');
@@ -62,8 +63,8 @@ const Internships = () => {
               <tr>
                 <th className="px-lg py-md">Company</th>
                 <th className="px-lg py-md">Role</th>
-                <th className="px-lg py-md">Date Applied</th>
-                <th className="px-lg py-md">Status</th>
+                <th className="px-lg py-md">Start Date</th>
+                <th className="px-lg py-md">Ongoing</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-outline-variant">
@@ -78,10 +79,10 @@ const Internships = () => {
                     </div>
                   </td>
                   <td className="px-lg py-md font-body-sm text-body-sm text-on-surface">{internship.role}</td>
-                  <td className="px-lg py-md font-body-sm text-body-sm text-on-surface">{internship.date_applied || 'N/A'}</td>
+                  <td className="px-lg py-md font-body-sm text-body-sm text-on-surface">{internship.start_date || 'N/A'}</td>
                   <td className="px-lg py-md">
                     <span className="bg-surface-container-high border border-outline-variant font-label-caps text-label-caps px-xs py-1 rounded text-on-surface uppercase tracking-widest">
-                      {internship.status}
+                      {internship.is_ongoing ? 'ONGOING' : 'COMPLETED'}
                     </span>
                   </td>
                 </tr>
@@ -117,17 +118,24 @@ const Internships = () => {
                 />
               </div>
               <div>
-                <label className="block font-label-caps text-label-caps text-on-surface-variant mb-xs">Status</label>
-                <select 
-                  className="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary outline-none text-on-surface"
-                  value={formData.status}
-                  onChange={e => setFormData({...formData, status: e.target.value})}
-                >
-                  <option value="APPLIED">Applied</option>
-                  <option value="INTERVIEWING">Interviewing</option>
-                  <option value="OFFER">Offer</option>
-                  <option value="REJECTED">Rejected</option>
-                </select>
+                <label className="block font-label-caps text-label-caps text-on-surface-variant mb-xs">Start Date</label>
+                <input
+                  type="date"
+                  required
+                  className="w-full px-md py-sm bg-surface-container-lowest border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary outline-none"
+                  value={formData.start_date}
+                  onChange={e => setFormData({...formData, start_date: e.target.value})}
+                />
+              </div>
+              <div>
+                <label className="inline-flex items-center gap-sm font-label-caps text-label-caps text-on-surface-variant">
+                  <input
+                    type="checkbox"
+                    checked={formData.is_ongoing}
+                    onChange={e => setFormData({...formData, is_ongoing: e.target.checked})}
+                  />
+                  Internship is ongoing
+                </label>
               </div>
               <div className="flex gap-md mt-sm">
                 <button 

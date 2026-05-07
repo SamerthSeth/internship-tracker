@@ -3,6 +3,7 @@ Authentication routes - Signup, login, token refresh
 """
 
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.security import HTTPAuthorizationCredentials
 from sqlalchemy.ext.asyncio import AsyncSession
 from datetime import timedelta
 
@@ -135,7 +136,7 @@ async def refresh_token(request: TokenRefreshRequest, db: AsyncSession = Depends
         )
 
 
-def get_current_user(token: str = None):
+def get_current_user(token: str | HTTPAuthorizationCredentials | None = None):
     """
     Dependency to get current user from JWT token
     
@@ -153,9 +154,12 @@ def get_current_user(token: str = None):
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Missing authorization token"
         )
+
+    if isinstance(token, HTTPAuthorizationCredentials):
+        token = token.credentials
     
     # Remove "Bearer " prefix if present
-    if token.startswith("Bearer "):
+    if isinstance(token, str) and token.startswith("Bearer "):
         token = token[7:]
     
     token_data = decode_token(token)

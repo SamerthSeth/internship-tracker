@@ -3,7 +3,7 @@ Internship routes - CRUD operations for internships
 """
 
 from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File
-from fastapi.security import HTTPBearer
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core import get_db
@@ -20,7 +20,7 @@ security = HTTPBearer()
 @router.post("", response_model=InternshipResponse, status_code=status.HTTP_201_CREATED)
 async def create_internship(
     internship: InternshipCreate,
-    credentials: str = Depends(security),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: AsyncSession = Depends(get_db)
 ):
     """
@@ -53,7 +53,7 @@ async def create_internship_with_file(
     description: str = None,
     end_date: str = None,
     is_ongoing: bool = True,
-    credentials: str = Depends(security),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: AsyncSession = Depends(get_db)
 ):
     """
@@ -100,7 +100,7 @@ async def create_internship_with_file(
 async def get_internships(
     skip: int = 0,
     limit: int = 100,
-    credentials: str = Depends(security),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: AsyncSession = Depends(get_db)
 ):
     """
@@ -127,7 +127,7 @@ async def get_internships(
 
 @router.get("/active", response_model=list)
 async def get_active_internships(
-    credentials: str = Depends(security),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: AsyncSession = Depends(get_db)
 ):
     """
@@ -151,7 +151,7 @@ async def get_active_internships(
 @router.get("/{internship_id}", response_model=InternshipResponse)
 async def get_internship(
     internship_id: int,
-    credentials: str = Depends(security),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: AsyncSession = Depends(get_db)
 ):
     """
@@ -184,7 +184,7 @@ async def get_internship(
 async def update_internship(
     internship_id: int,
     internship_update: InternshipUpdate,
-    credentials: str = Depends(security),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: AsyncSession = Depends(get_db)
 ):
     """
@@ -217,7 +217,7 @@ async def update_internship(
 @router.delete("/{internship_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_internship(
     internship_id: int,
-    credentials: str = Depends(security),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: AsyncSession = Depends(get_db)
 ):
     """

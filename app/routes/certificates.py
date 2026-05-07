@@ -3,7 +3,7 @@ Certificate routes - CRUD operations for certificates
 """
 
 from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File
-from fastapi.security import HTTPBearer
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core import get_db
@@ -20,7 +20,7 @@ security = HTTPBearer()
 @router.post("", response_model=CertificateResponse, status_code=status.HTTP_201_CREATED)
 async def create_certificate(
     certificate: CertificateCreate,
-    credentials: str = Depends(security),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: AsyncSession = Depends(get_db)
 ):
     """
@@ -53,7 +53,7 @@ async def create_certificate_with_file(
     file: UploadFile = File(...),
     description: str = None,
     expiry_date: str = None,
-    credentials: str = Depends(security),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: AsyncSession = Depends(get_db)
 ):
     """
@@ -100,7 +100,7 @@ async def create_certificate_with_file(
 async def get_certificates(
     skip: int = 0,
     limit: int = 100,
-    credentials: str = Depends(security),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: AsyncSession = Depends(get_db)
 ):
     """
@@ -128,7 +128,7 @@ async def get_certificates(
 @router.get("/{certificate_id}", response_model=CertificateResponse)
 async def get_certificate(
     certificate_id: int,
-    credentials: str = Depends(security),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: AsyncSession = Depends(get_db)
 ):
     """
@@ -161,7 +161,7 @@ async def get_certificate(
 async def update_certificate(
     certificate_id: int,
     certificate_update: CertificateUpdate,
-    credentials: str = Depends(security),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: AsyncSession = Depends(get_db)
 ):
     """
@@ -194,7 +194,7 @@ async def update_certificate(
 @router.delete("/{certificate_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_certificate(
     certificate_id: int,
-    credentials: str = Depends(security),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     db: AsyncSession = Depends(get_db)
 ):
     """
