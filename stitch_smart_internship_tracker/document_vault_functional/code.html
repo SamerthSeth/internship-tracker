@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="light dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-fixed": "#360f00",
+                        "on-primary-fixed": "#001a43",
+                        "surface-container-lowest": "#0b0e15",
+                        "surface-dim": "#10131b",
+                        "surface-bright": "#363942",
+                        "error": "#ffb4ab",
+                        "on-secondary-container": "#d0a6ff",
+                        "inverse-on-surface": "#2d3039",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "primary": "#aec6ff",
+                        "outline-variant": "#414754",
+                        "surface-container-highest": "#32353d",
+                        "on-background": "#e0e2ed",
+                        "on-surface-variant": "#c1c6d7",
+                        "on-tertiary": "#581e00",
+                        "on-tertiary-container": "#fffeff",
+                        "on-primary": "#002e6b",
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#e0e2ed",
+                        "surface-variant": "#32353d",
+                        "error-container": "#93000a",
+                        "on-secondary": "#470083",
+                        "secondary": "#dbb8ff",
+                        "on-secondary-fixed": "#2b0052",
+                        "on-primary-container": "#ffffff",
+                        "tertiary-fixed": "#ffdbcd",
+                        "secondary-container": "#6807ba",
+                        "surface-container": "#1c1f27",
+                        "inverse-primary": "#0059c5",
+                        "secondary-fixed": "#efdbff",
+                        "primary-fixed": "#d8e2ff",
+                        "outline": "#8b90a0",
+                        "tertiary": "#ffb596",
+                        "surface": "#10131b",
+                        "secondary-fixed-dim": "#dbb8ff",
+                        "primary-fixed-dim": "#aec6ff",
+                        "surface-tint": "#aec6ff",
+                        "on-error": "#690005",
+                        "tertiary-container": "#ca4e00",
+                        "on-secondary-fixed-variant": "#6600b7",
+                        "on-surface": "#e0e2ed",
+                        "background": "#10131b",
+                        "surface-container-high": "#272a32",
+                        "surface-container-low": "#181b23"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        xs: "4px",
+                        sm: "8px",
+                        "2xl": "48px",
+                        lg: "24px",
+                        md: "16px",
+                        xl: "32px",
+                        "3xl": "64px"
+                    },
+                    fontFamily: {
+                        "body-base": ["Inter"],
+                        "label-caps": ["Inter"],
+                        h3: ["Inter"],
+                        code: ["monospace"],
+                        h2: ["Inter"],
+                        h1: ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    fontSize: {
+                        "body-base": ["14px", {lineHeight: "1.6", letterSpacing: "0em", fontWeight: "400"}],
+                        "label-caps": ["11px", {lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600"}],
+                        h3: ["18px", {lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "600"}],
+                        code: ["13px", {lineHeight: "1.4", letterSpacing: "0em", fontWeight: "400"}],
+                        h2: ["24px", {lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "600"}],
+                        h1: ["32px", {lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "600"}],
+                        "body-sm": ["13px", {lineHeight: "1.5", letterSpacing: "0em", fontWeight: "400"}]
+                    }
+                }
+            }
+        };
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        [x-cloak] { display: none !important; }
+    </style>
+<script defer="" src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-background text-on-background font-body-base" x-data="{ 
+    showNewFolderModal: false, 
+    showPreviewModal: false, 
+    previewDoc: null,
+    searchQuery: '',
+    folders: [
+        { id: 1, name: 'Resumes', files: 12, updated: '2d ago', icon: 'description', color: 'primary' },
+        { id: 2, name: 'Transcripts', files: 4, updated: '1w ago', icon: 'school', color: 'tertiary' },
+        { id: 3, name: 'Certificates', files: 28, updated: '3h ago', icon: 'workspace_premium', color: 'secondary' },
+        { id: 4, name: 'Offer Letters', files: 2, updated: '1m ago', icon: 'drafts', color: 'on-surface' }
+    ],
+    documents: [
+        { id: 1, name: 'Summer_Internship_Offer_Google.pdf', type: 'Offer Letters', size: '1.2 MB', date: 'Oct 24, 2023', icon: 'picture_as_pdf', color: 'primary-container' },
+        { id: 2, name: 'Updated_Resume_V4_Final.docx', type: 'Resumes', size: '425 KB', date: 'Nov 12, 2023', icon: 'article', color: 'tertiary-container' },
+        { id: 3, name: 'AWS_Solutions_Architect_Certificate.png', type: 'Certificates', size: '3.5 MB', date: 'Dec 01, 2023', icon: 'image', color: 'secondary-container' },
+        { id: 4, name: 'Semester_7_Transcript.pdf', type: 'Transcripts', size: '890 KB', date: 'Jan 05, 2024', icon: 'picture_as_pdf', color: 'surface-container-highest' }
+    ],
+    openPreview(doc) {
+        this.previewDoc = doc;
+        this.showPreviewModal = true;
+    }
+}">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full w-[240px] flex flex-col gap-sm p-md h-screen bg-surface border-r border-outline-variant z-50">
+<div class="mb-xl px-md">
+<h2 class="font-h2 text-h2 font-black text-primary mb-xs">InternTrack Pro</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Management Suite</p>
+</div>
+<nav class="flex flex-col gap-xs flex-grow">
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-low rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-low rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="workspace_premium">workspace_premium</span>
+<span class="font-label-caps text-label-caps">Certificate Manager</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-low rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="font-label-caps text-label-caps">Internship Tracker</span>
+</a>
+<a class="flex items-center gap-md text-primary font-bold bg-surface-container-high rounded-xl px-md py-sm" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared" style="font-variation-settings: 'FILL' 1;">folder_shared</span>
+<span class="font-label-caps text-label-caps">Document Vault</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-low rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+<span class="font-label-caps text-label-caps">Eligibility Checker</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm mt-auto hover:bg-surface-container-low rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[240px] flex flex-col min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="flex justify-between items-center w-full px-lg h-md border-b border-outline-variant bg-surface sticky top-0 z-40">
+<div class="flex items-center gap-lg">
+<div class="relative group">
+<span class="absolute inset-y-0 left-0 pl-md flex items-center text-on-surface-variant group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="search">search</span>
+</span>
+<input class="bg-surface-container-low border border-transparent focus:border-primary-container rounded-full py-xs pl-3xl pr-md w-[320px] text-body-sm focus:ring-4 focus:ring-primary/10 outline-none transition-all" placeholder="Search files, folders..." type="text" x-model="searchQuery"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-sm rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-[32px] h-[32px] rounded-full overflow-hidden border border-outline-variant cursor-pointer hover:border-primary transition-colors">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="A professional headshot of a young professional in a light-filled modern studio setting. The lighting is soft and flattering, creating a clean light-mode aesthetic. The individual has a confident, approachable expression, fitting a high-end productivity app's user profile. The background is a soft, out-of-focus office environment with neutral tones and blue accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKyjX7ZX0_0eMrIt3Eq4N3w4Fu90MyhsdzydqTtUutTXqG3WCvSMGhS1g9BnkUl75feombRY_qXMCXNjXrrlljCo9JpxU2xukmrYEB0RtMG1XWIZAeRH45it8105RFQD8yJ4ji_L-yk2EatV1xZiotblBFMUUOTiyUPEJHRUWwjYhzPqWhHKXXEEEKoOgrF65XFaxXyELwokmzPzZcJvPjUUfdHR2mvx9lBYpB5OtO2CImPjkyEDAgg35zUxoHscK6huZ0KBNPXBU"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<div class="p-lg max-w-[1440px] w-full mx-auto space-y-lg">
+<!-- Breadcrumbs and Action Row -->
+<div class="flex justify-between items-end">
+<div>
+<h1 class="font-h1 text-h1 text-on-surface">Document Vault</h1>
+<div class="flex items-center gap-xs text-body-sm text-on-surface-variant mt-xs">
+<a class="hover:text-on-surface transition-colors" href="#">My Files</a>
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-primary font-bold">Central Archive</span>
+</div>
+</div>
+<div class="flex gap-sm">
+<button class="flex items-center gap-sm px-md py-sm bg-surface-container-high border border-outline-variant rounded-xl text-body-sm font-bold text-on-surface hover:bg-surface-container-highest focus:ring-2 focus:ring-primary/20 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]" data-icon="filter_list">filter_list</span>
+                        Filter
+                    </button>
+<button @click="showNewFolderModal = true" class="flex items-center gap-sm px-md py-sm bg-primary text-on-primary rounded-xl text-body-sm font-bold hover:opacity-90 transition-all shadow-sm active:scale-95">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
+                        New Folder
+                    </button>
+</div>
+</div>
+<!-- Drag & Drop Zone -->
+<section class="w-full">
+<div class="border-2 border-dashed border-outline-variant bg-surface-container-lowest rounded-xl p-2xl flex flex-col items-center justify-center text-center group hover:border-primary hover:bg-primary/5 transition-all cursor-pointer">
+<div class="w-xl h-xl bg-surface-container-high rounded-full flex items-center justify-center mb-md group-hover:bg-primary group-hover:text-on-primary group-hover:scale-110 transition-all duration-300">
+<span class="material-symbols-outlined text-[32px]" data-icon="cloud_upload">cloud_upload</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-xs">Upload New Documents</h3>
+<p class="text-body-sm text-on-surface-variant max-w-[400px]">Drag and drop your resumes, transcripts, or certificates here. Supports PDF, DOCX, and high-res images up to 25MB.</p>
+</div>
+</section>
+<!-- Quick Access Folders -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md">
+<template :key="folder.id" x-for="folder in folders">
+<div class="bg-surface border border-outline-variant p-md rounded-xl hover:bg-surface-container-low hover:border-primary/30 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-lg">
+<div :class="`w-xl h-xl rounded-lg bg-${folder.color}-fixed flex items-center justify-center text-${folder.color}`">
+<span :data-icon="folder.icon" class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;" x-text="folder.icon"></span>
+</div>
+<button class="p-xs rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<h4 class="font-h3 text-h3 text-on-surface" x-text="folder.name"></h4>
+<p class="text-body-sm text-on-surface-variant mt-xs" x-text="`${folder.files} files • Updated ${folder.updated}`"></p>
+</div>
+</template>
+</section>
+<!-- File List Table -->
+<section class="bg-surface border border-outline-variant rounded-xl overflow-hidden">
+<div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant">Recent Documents</h4>
+<div class="flex items-center gap-sm">
+<span class="text-body-sm text-on-surface-variant">Sort by:</span>
+<select class="text-body-sm font-bold border-none bg-transparent focus:ring-0 cursor-pointer text-primary">
+<option>Upload Date</option>
+<option>File Name</option>
+<option>Size</option>
+</select>
+</div>
+</div>
+<div class="divide-y divide-outline-variant">
+<template :key="doc.id" x-for="doc in documents">
+<div class="grid grid-cols-12 gap-md p-md items-center hover:bg-surface-container-low transition-all">
+<div class="col-span-6 flex items-center gap-md">
+<div :class="`w-lg h-lg flex items-center justify-center bg-${doc.color} text-on-${doc.color} rounded`">
+<span :data-icon="doc.icon" class="material-symbols-outlined text-[20px]" x-text="doc.icon"></span>
+</div>
+<div>
+<p class="text-body-base font-bold text-on-surface group-hover:text-primary transition-colors" x-text="doc.name"></p>
+<p class="text-body-sm text-on-surface-variant" x-text="doc.type"></p>
+</div>
+</div>
+<div class="col-span-2">
+<p class="text-body-sm text-on-surface-variant" x-text="doc.size"></p>
+</div>
+<div class="col-span-2">
+<p class="text-body-sm text-on-surface-variant" x-text="doc.date"></p>
+</div>
+<div class="col-span-2 flex justify-end">
+<button @click="openPreview(doc)" class="px-md py-xs bg-surface-container-high text-primary rounded-lg text-body-sm font-bold hover:bg-primary hover:text-on-primary transition-all active:scale-95">
+                                    Preview
+                                </button>
+</div>
+</div>
+</template>
+</div>
+<div class="p-md bg-surface-container-lowest border-t border-outline-variant flex justify-center">
+<button class="text-body-sm font-bold text-primary hover:underline transition-all">View All Documents</button>
+</div>
+</section>
+</div>
+</main>
+<!-- New Folder Modal -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-md bg-black/60 backdrop-blur-sm" x-cloak="" x-show="showNewFolderModal" x-transition:enter="transition ease-out duration-300" x-transition:enter-end="opacity-100 scale-100" x-transition:enter-start="opacity-0 scale-95" x-transition:leave="transition ease-in duration-200" x-transition:leave-end="opacity-0 scale-95" x-transition:leave-start="opacity-100 scale-100">
+<div @click.away="showNewFolderModal = false" class="bg-surface border border-outline-variant rounded-2xl w-full max-w-[400px] overflow-hidden shadow-2xl">
+<div class="p-lg border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+<h3 class="font-h3 text-h3 text-on-surface">Create New Folder</h3>
+<button @click="showNewFolderModal = false" class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-lg space-y-md">
+<div class="space-y-xs">
+<label class="text-label-caps text-on-surface-variant">Folder Name</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-xl px-md py-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none text-body-base" placeholder="Enter folder name..." type="text"/>
+</div>
+<div class="flex gap-sm pt-md">
+<button @click="showNewFolderModal = false" class="flex-1 px-md py-sm bg-surface-container-high border border-outline-variant rounded-xl text-body-base font-bold hover:bg-surface-container-highest transition-all">Cancel</button>
+<button @click="showNewFolderModal = false" class="flex-1 px-md py-sm bg-primary text-on-primary rounded-xl text-body-base font-bold hover:opacity-90 transition-all">Create Folder</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Preview Modal -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-lg bg-black/80 backdrop-blur-md" x-cloak="" x-show="showPreviewModal" x-transition:enter="transition ease-out duration-300" x-transition:enter-end="opacity-100" x-transition:enter-start="opacity-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-end="opacity-0" x-transition:leave-start="opacity-100">
+<div @click.away="showPreviewModal = false" class="bg-surface-container-low border border-outline-variant rounded-2xl w-full max-w-[900px] h-[80vh] flex flex-col shadow-2xl relative">
+<div class="p-md border-b border-outline-variant flex justify-between items-center">
+<div class="flex items-center gap-md">
+<div class="p-sm bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined" x-text="previewDoc?.icon || 'description'"></span>
+</div>
+<div>
+<h3 class="font-h3 text-on-surface" x-text="previewDoc?.name"></h3>
+<p class="text-body-sm text-on-surface-variant" x-text="`${previewDoc?.type} • ${previewDoc?.size}`"></p>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-sm rounded-xl bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface transition-all">
+<span class="material-symbols-outlined">download</span>
+</button>
+<button @click="showPreviewModal = false" class="p-sm rounded-xl bg-surface-container-high hover:bg-error/20 hover:text-error text-on-surface-variant transition-all">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<div class="flex-grow bg-surface-container-lowest m-md rounded-xl border border-outline-variant flex flex-col items-center justify-center p-2xl">
+<!-- Placeholder for PDF/Doc preview -->
+<div class="text-center space-y-md max-w-md">
+<span class="material-symbols-outlined text-[64px] text-on-surface-variant/30">visibility</span>
+<h4 class="font-h2 text-on-surface">Secure Document Preview</h4>
+<p class="text-body-base text-on-surface-variant">This is a placeholder for the actual document content rendering engine. In a live environment, the PDF or Image would be displayed here using a secure viewer.</p>
+</div>
+</div>
+<div class="p-md border-t border-outline-variant flex justify-end gap-md">
+<button @click="showPreviewModal = false" class="px-xl py-sm bg-primary text-on-primary rounded-xl text-body-base font-bold hover:opacity-90 transition-all">Done Viewing</button>
+</div>
+</div>
+</div>
+</body></html>

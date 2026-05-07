@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html class="light dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"inverse-primary": "#0059c5", "on-secondary-fixed": "#2b0052", "on-secondary-container": "#d0a6ff", tertiary: "#ffb596", "outline-variant": "#414754", "secondary-fixed": "#efdbff", "on-primary-fixed-variant": "#004397", "surface-container-lowest": "#0b0e15", "on-surface": "#e0e2ed", error: "#ffb4ab", "primary-fixed-dim": "#aec6ff", "surface-container-low": "#181b23", "on-primary-container": "#ffffff", "surface-dim": "#10131b", primary: "#aec6ff", "on-background": "#e0e2ed", background: "#000000", surface: "#10131b", "tertiary-fixed": "#ffdbcd", "error-container": "#93000a", "secondary-container": "#6807ba", "on-secondary": "#470083", secondary: "#dbb8ff", "inverse-surface": "#e0e2ed", "surface-container-high": "#272a32", "on-secondary-fixed-variant": "#6600b7", "on-tertiary": "#581e00", "on-error-container": "#ffdad6", "on-tertiary-fixed": "#360f00", "surface-tint": "#aec6ff", "primary-container": "#0070f3", "on-error": "#690005", "primary-fixed": "#d8e2ff", "on-surface-variant": "#c1c6d7", "tertiary-fixed-dim": "#ffb596", "on-tertiary-fixed-variant": "#7d2d00", "surface-bright": "#363942", "inverse-on-surface": "#2d3039", "tertiary-container": "#ca4e00", "secondary-fixed-dim": "#dbb8ff", "on-primary-fixed": "#001a43", "surface-container-highest": "#32353d", "on-primary": "#002e6b", "surface-variant": "#32353d", "surface-container": "#1c1f27", "on-tertiary-container": "#fffeff", outline: "#8b90a0"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {sm: "8px", "2xl": "48px", xl: "32px", xs: "4px", lg: "24px", "3xl": "64px", md: "16px"}, fontFamily: {"label-caps": ["Inter"], h2: ["Inter"], h3: ["Inter"], "body-base": ["Inter"], "body-sm": ["Inter"], h1: ["Inter"], code: ["monospace"]}, fontSize: {"label-caps": ["11px", {lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600"}], h2: ["24px", {lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "600"}], h3: ["18px", {lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "600"}], "body-base": ["14px", {lineHeight: "1.6", letterSpacing: "0em", fontWeight: "400"}], "body-sm": ["13px", {lineHeight: "1.5", letterSpacing: "0em", fontWeight: "400"}], h1: ["32px", {lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "600"}], code: ["13px", {lineHeight: "1.4", letterSpacing: "0em", fontWeight: "400"}]}}}};</script>
+</head>
+<body class="bg-[#000000] min-h-screen flex items-center justify-center p-lg">
+<!-- Auth Container -->
+<main class="w-full max-w-[440px] flex flex-col gap-lg">
+<!-- Branding Header -->
+<header class="flex flex-col items-center text-center gap-xs">
+<div class="w-xl h-xl bg-primary-container rounded-xl flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'opsz' 32">analytics</span>
+</div>
+<h1 class="font-h1 text-h1 text-on-surface tracking-tight">InternTrack Pro</h1>
+<p class="font-body-base text-body-base text-on-surface-variant">Manage your career trajectory with precision.</p>
+</header>
+<!-- Authentication Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-xl shadow-sm">
+<div class="flex flex-col gap-lg">
+<!-- Social Auth Cluster -->
+<div class="grid grid-cols-2 gap-md">
+<button class="flex items-center justify-center gap-sm px-md py-sm border border-outline-variant rounded-lg font-body-sm text-body-sm text-on-surface hover:bg-surface-container-low transition-colors">
+<img alt="Google Logo" class="w-4 h-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtt9IzKwy5Edx2rwQq6tHtbRWyM-ySKxsMHeqNJQPEuFimaWa2k2mTfQ1u4uE6Om-5LhFnPVrQ2MgjfwCIxK6mYGqVQNXLPHkPompJ7imIp1cYQ7THCtRU56VQJfkV-0iSJ_9E45z2Fd0UtIruvqv70ARuLfpZ5W_cGTW6ZMm3W6T-uZTZsjuygFpthxtg_2kGjrBnvV94GPe1zB535VKYc3aKHTjBODPfNb8jcPNWgGpEMoFbu432kEv6LRocSXlOmqDox4H6pto"/>
+                        Google
+                    </button>
+<button class="flex items-center justify-center gap-sm px-md py-sm border border-outline-variant rounded-lg font-body-sm text-body-sm text-on-surface hover:bg-surface-container-low transition-colors">
+<img alt="GitHub Logo" class="w-4 h-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMLbT_t0wATcaHfj6Zd6EzBwvqzrj8C4Eguq5HHBvPEGK0624EXxCzNCwScqRkBjTC8Oe6YtlHKuY3NtrNxTJAFned3LEaTrn0m2-iogdyC3LdwYBOl0w4mOAKuM0FsIONL1sqAx-eV9YVWDqbT3Oc44NoHFhOBuH8HB9HHYmLfWl5VyU0aS5C87XPWuuXQgrdbhLdg3YY6VjXGmyw3qiG9utjbPuofYSFul6gRn8nEZ3ATwsM68wIKXrt59FDaX4yudibiahQQic"/>
+                        GitHub
+                    </button>
+</div>
+<!-- Separator -->
+<div class="relative flex items-center py-sm">
+<div class="flex-grow border-t border-outline-variant"></div>
+<span class="flex-shrink mx-md font-label-caps text-label-caps text-outline uppercase">Or continue with</span>
+<div class="flex-grow border-t border-outline-variant"></div>
+</div>
+<!-- Email Form -->
+<form class="flex flex-col gap-md" onsubmit="return false;">
+<div class="flex flex-col gap-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant px-xs" for="email">Email Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline" style="font-size: 20px;">mail</span>
+<input class="w-full pl-3xl pr-md py-sm bg-surface border border-outline-variant rounded-lg font-body-base text-body-base focus:ring-2 focus:ring-primary-container focus:border-primary-container transition-all outline-none" id="email" placeholder="name@company.com" type="email"/>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<div class="flex justify-between items-center px-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="password">Password</label>
+<a class="font-label-caps text-label-caps text-primary hover:underline" href="#">Forgot password?</a>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline" style="font-size: 20px;">lock</span>
+<input class="w-full pl-3xl pr-md py-sm bg-surface border border-outline-variant rounded-lg font-body-base text-body-base focus:ring-2 focus:ring-primary-container focus:border-primary-container transition-all outline-none" id="password" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<div class="flex items-center gap-sm px-xs">
+<input class="w-4 h-4 text-primary border-outline-variant rounded focus:ring-primary" id="remember" type="checkbox"/>
+<label class="font-body-sm text-body-sm text-on-surface-variant" for="remember">Keep me logged in for 30 days</label>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-h3 text-h3 py-md rounded-lg hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-sm" type="submit">
+                        Sign In
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</form>
+</div>
+</section>
+<!-- Footer Actions -->
+<footer class="text-center">
+<p class="font-body-base text-body-base text-on-surface-variant">
+                Don't have an account? 
+                <a class="text-primary font-bold hover:underline" href="#">Sign up</a>
+</p>
+</footer>
+<!-- Security/Trust Badges -->
+<div class="flex justify-center items-center gap-lg mt-md opacity-60 transition-all">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 16px;">verified_user</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Enterprise Security</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 16px;">database</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">GDPR Compliant</span>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html class="light dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Internship Tracker | InternTrack Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
+    const modal = document.getElementById('newAppModal');
+    const searchInput = document.getElementById('searchInput');
+    const tableRows = document.querySelectorAll('tbody tr');
+    const filterAll = document.getElementById('filterAll');
+    const filterInterviews = document.getElementById('filterInterviews');
+    const successToast = document.getElementById('successToast');
+    const applicationForm = document.querySelector('#newAppModal form');
+
+    // Modal toggle function
+    function toggleModal() {
+        modal.classList.toggle('hidden');
+        modal.classList.toggle('flex');
+    }
+
+    // Close modal when clicking outside the content area
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) toggleModal();
+    });
+
+    // Show Toast
+    function showToast() {
+        successToast.classList.remove('translate-y-20', 'opacity-0');
+        successToast.classList.add('translate-y-0', 'opacity-100');
+        setTimeout(() => {
+            successToast.classList.add('translate-y-20', 'opacity-0');
+            successToast.classList.remove('translate-y-0', 'opacity-100');
+        }, 3000);
+    }
+
+    // Form submission mock
+    applicationForm.onsubmit = (e) => {
+        e.preventDefault();
+        toggleModal();
+        showToast();
+        applicationForm.reset();
+    };
+
+    // Search logic
+    searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        tableRows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(term) ? '' : 'none';
+        });
+    });
+
+    // Filter logic
+    function setActiveFilter(activeBtn, otherBtn, filterText) {
+        activeBtn.classList.add('bg-primary', 'text-on-primary');
+        activeBtn.classList.remove('hover:bg-surface-container-high');
+        otherBtn.classList.remove('bg-primary', 'text-on-primary');
+        otherBtn.classList.add('hover:bg-surface-container-high');
+
+        tableRows.forEach(row => {
+            if (!filterText) {
+                row.style.display = '';
+            } else {
+                const status = row.querySelector('td:nth-child(4)').textContent.trim().toLowerCase();
+                row.style.display = status.includes(filterText.toLowerCase()) ? '' : 'none';
+            }
+        });
+    }
+
+    filterAll.onclick = () => setActiveFilter(filterAll, filterInterviews, null);
+    filterInterviews.onclick = () => setActiveFilter(filterInterviews, filterAll, 'interviewing');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"inverse-primary": "#0059c5", "on-secondary-fixed": "#2b0052", "on-secondary-container": "#d0a6ff", tertiary: "#ffb596", "outline-variant": "#414754", "secondary-fixed": "#efdbff", "on-primary-fixed-variant": "#004397", "surface-container-lowest": "#0b0e15", "on-surface": "#e0e2ed", error: "#ffb4ab", "primary-fixed-dim": "#aec6ff", "surface-container-low": "#181b23", "on-primary-container": "#ffffff", "surface-dim": "#10131b", primary: "#aec6ff", "on-background": "#e0e2ed", background: "#10131b", surface: "#10131b", "tertiary-fixed": "#ffdbcd", "error-container": "#93000a", "secondary-container": "#6807ba", "on-secondary": "#470083", secondary: "#dbb8ff", "inverse-surface": "#e0e2ed", "surface-container-high": "#272a32", "on-secondary-fixed-variant": "#6600b7", "on-tertiary": "#581e00", "on-error-container": "#ffdad6", "on-tertiary-fixed": "#360f00", "surface-tint": "#aec6ff", "primary-container": "#0070f3", "on-error": "#690005", "primary-fixed": "#d8e2ff", "on-surface-variant": "#c1c6d7", "tertiary-fixed-dim": "#ffb596", "on-tertiary-fixed-variant": "#7d2d00", "surface-bright": "#363942", "inverse-on-surface": "#2d3039", "tertiary-container": "#ca4e00", "secondary-fixed-dim": "#dbb8ff", "on-primary-fixed": "#001a43", "surface-container-highest": "#32353d", "on-primary": "#002e6b", "surface-variant": "#32353d", "surface-container": "#1c1f27", "on-tertiary-container": "#fffeff", outline: "#8b90a0"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {sm: "8px", "2xl": "48px", xl: "32px", xs: "4px", lg: "24px", "3xl": "64px", md: "16px"}, fontFamily: {"label-caps": ["Inter"], h2: ["Inter"], h3: ["Inter"], "body-base": ["Inter"], "body-sm": ["Inter"], h1: ["Inter"], code: ["monospace"]}, fontSize: {"label-caps": ["11px", {lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600"}], h2: ["24px", {lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "600"}], h3: ["18px", {lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "600"}], "body-base": ["14px", {lineHeight: "1.6", letterSpacing: "0em", fontWeight: "400"}], "body-sm": ["13px", {lineHeight: "1.5", letterSpacing: "0em", fontWeight: "400"}], h1: ["32px", {lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "600"}], code: ["13px", {lineHeight: "1.4", letterSpacing: "0em", fontWeight: "400"}]}}}};</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e0e2ed; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden">
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-0 h-full w-[240px] flex flex-col gap-sm p-md h-screen bg-surface border-r border-outline-variant z-50">
+<div class="mb-xl px-md">
+<h1 class="font-h2 text-h2 font-black text-primary">InternTrack Pro</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mt-xs">Management Suite</p>
+</div>
+<nav class="flex flex-col gap-xs flex-1">
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-low transition-all rounded-xl cursor-pointer" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-low transition-all rounded-xl cursor-pointer" href="#">
+<span class="material-symbols-outlined">workspace_premium</span>
+<span class="font-label-caps text-label-caps">Certificate Manager</span>
+</a>
+<a class="flex items-center gap-md text-primary font-bold bg-surface-container-high rounded-xl px-md py-sm scale-95 transition-transform duration-150 cursor-pointer" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment</span>
+<span class="font-label-caps text-label-caps">Internship Tracker</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-low transition-all rounded-xl cursor-pointer" href="#">
+<span class="material-symbols-outlined">folder_shared</span>
+<span class="font-label-caps text-label-caps">Document Vault</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-low transition-all rounded-xl cursor-pointer" href="#">
+<span class="material-symbols-outlined">verified</span>
+<span class="font-label-caps text-label-caps">Eligibility Checker</span>
+</a>
+</nav>
+<div class="mt-auto">
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-low transition-all rounded-xl cursor-pointer" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</div>
+</aside>
+<div class="ml-[240px] flex flex-col h-screen">
+<!-- TopNavBar (Shared Component) -->
+<header class="flex justify-between items-center w-full px-lg h-md max-w-[1440px] bg-surface border-b border-outline-variant z-40 sticky top-0 shrink-0 h-[64px]">
+<div class="flex items-center gap-md flex-1">
+<div class="relative w-full max-w-[400px]">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-xs pl-[44px] pr-md font-body-base text-body-base focus:ring-1 focus:ring-primary focus:ring-2" id="searchInput" placeholder="Search applications..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-[32px] h-[32px] rounded-full overflow-hidden border border-outline-variant">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="A professional headshot of a young professional male smiling warmly against a blurred office background. High-key natural lighting illuminates his features, creating a clean, modern, and trustworthy aesthetic. The colors are muted and professional, fitting into a minimalist productivity tool UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEg0dIWptkGJAjjhE6E6iTKkCYFjSofBnzIMH4ErtwWv_m3uzuOSC_jo5MJSriXA7n5Rw5agYYXEk-MDYCJ3vipYzNI1OGTQMFumUKSrXqpbuUXPeMTohmcvlLSPPg_lktSHBz_-O9UhexcyDOU-c6pZe4tJApJNy-9zMgYLwRX5xXpRvhnDGmTxXweXpsgRnXwFNoe0JqAoqNk24TyStDIQb-qOwJpN5ecmazS5SCARo_DTANRGDbIzCm50Bitae3quaiNWlEprk"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto custom-scrollbar p-lg">
+<div class="max-w-[1440px] mx-auto flex flex-col gap-lg">
+<!-- Page Header & Progress Section -->
+<section class="flex flex-col md:flex-row gap-lg items-stretch">
+<!-- Title & Summary -->
+<div class="flex-1 flex flex-col justify-center">
+<h2 class="font-h1 text-h1 text-on-surface">Internship Tracker</h2>
+<p class="font-body-base text-body-base text-on-surface-variant max-w-[600px] mt-sm">
+                            Manage your career journey with systematic precision. Track every application from initial submission to final offer.
+                        </p>
+</div>
+<!-- Progress Card (Bento Style) -->
+<div class="w-full md:w-[400px] bg-surface-container-low border border-outline-variant rounded-xl p-md flex flex-col gap-md">
+<div class="flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">APPLICATION MOMENTUM</span>
+<span class="font-label-caps text-label-caps text-secondary font-bold">72% TO TARGET</span>
+</div>
+<div class="flex flex-col gap-xs">
+<div class="w-full h-[6px] bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 72%"></div>
+</div>
+<div class="flex justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">18 Applications</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">25 Goal</span>
+</div>
+</div>
+<div class="flex gap-sm">
+<div class="flex-1 bg-surface rounded-lg p-sm border border-outline-variant text-center">
+<span class="block font-h2 text-h2 text-primary">03</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">INTERVIEWS</span>
+</div>
+<div class="flex-1 bg-surface rounded-lg p-sm border border-outline-variant text-center">
+<span class="block font-h2 text-h2 text-secondary">01</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">OFFERS</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Tracker Grid -->
+<section class="bg-surface border border-outline-variant rounded-xl overflow-hidden">
+<div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+<div class="flex items-center gap-md">
+<span class="font-h3 text-h3">Active Applications</span>
+<div class="flex gap-xs">
+<button class="px-sm py-xs bg-primary text-on-primary rounded text-[11px] font-bold uppercase tracking-wider" id="filterAll">All</button>
+<button class="px-sm py-xs hover:bg-surface-container-high rounded text-[11px] font-bold uppercase tracking-wider transition-colors" id="filterInterviews">Interviews</button>
+</div>
+</div>
+<button class="flex items-center gap-sm bg-primary text-on-primary px-md py-sm rounded-lg font-label-caps text-label-caps hover:opacity-90 transition-opacity cursor-pointer" id="openModalBtn" onclick="toggleModal()">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                            NEW APPLICATION
+                        </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-lg py-md font-label-caps text-label-caps text-on-surface-variant">COMPANY</th>
+<th class="px-lg py-md font-label-caps text-label-caps text-on-surface-variant">ROLE</th>
+<th class="px-lg py-md font-label-caps text-label-caps text-on-surface-variant text-center">DATE APPLIED</th>
+<th class="px-lg py-md font-label-caps text-label-caps text-on-surface-variant text-center">STATUS</th>
+<th class="px-lg py-md font-label-caps text-label-caps text-on-surface-variant"></th>
+</tr>
+</thead>
+<tbody class="font-body-base text-body-base text-on-surface">
+<!-- Row 1 -->
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors group cursor-pointer">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded bg-primary-fixed flex items-center justify-center font-bold text-primary">N</div>
+<span class="font-bold">Nexus Dynamics</span>
+</div>
+</td>
+<td class="px-lg py-md text-on-surface-variant">Product Management Intern</td>
+<td class="px-lg py-md text-center text-on-surface-variant">Oct 12, 2023</td>
+<td class="px-lg py-md text-center">
+<span class="px-sm py-1 rounded bg-secondary-container/10 text-secondary text-[11px] font-bold uppercase border border-secondary/20">Interviewing</span>
+</td>
+<td class="px-lg py-md text-right">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors group cursor-pointer">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded bg-tertiary-fixed flex items-center justify-center font-bold text-tertiary">A</div>
+<span class="font-bold">Aether Labs</span>
+</div>
+</td>
+<td class="px-lg py-md text-on-surface-variant">Full Stack Developer</td>
+<td class="px-lg py-md text-center text-on-surface-variant">Oct 15, 2023</td>
+<td class="px-lg py-md text-center">
+<span class="px-sm py-1 rounded bg-primary-container/10 text-primary text-[11px] font-bold uppercase border border-primary/20">Offer</span>
+</td>
+<td class="px-lg py-md text-right">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors group cursor-pointer">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center font-bold text-on-surface-variant">Q</div>
+<span class="font-bold">Quantum Systems</span>
+</div>
+</td>
+<td class="px-lg py-md text-on-surface-variant">Data Analyst Intern</td>
+<td class="px-lg py-md text-center text-on-surface-variant">Oct 08, 2023</td>
+<td class="px-lg py-md text-center">
+<span class="px-sm py-1 rounded bg-on-surface-variant/10 text-on-surface-variant text-[11px] font-bold uppercase border border-outline">Applied</span>
+</td>
+<td class="px-lg py-md text-right">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors group cursor-pointer">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded bg-error-container/20 flex items-center justify-center font-bold text-error">V</div>
+<span class="font-bold">Vertex Corp</span>
+</div>
+</td>
+<td class="px-lg py-md text-on-surface-variant">UX Design Intern</td>
+<td class="px-lg py-md text-center text-on-surface-variant">Sep 24, 2023</td>
+<td class="px-lg py-md text-center">
+<span class="px-sm py-1 rounded bg-error-container/10 text-error text-[11px] font-bold uppercase border border-error/20">Rejected</span>
+</td>
+<td class="px-lg py-md text-right">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+<!-- Slide-out Detail Panel (Visual Representation) -->
+</div>
+<script>
+    const modal = document.getElementById('newAppModal');
+    const searchInput = document.getElementById('searchInput');
+    const tableRows = document.querySelectorAll('tbody tr');
+    const filterAll = document.getElementById('filterAll');
+    const filterInterviews = document.getElementById('filterInterviews');
+    const successToast = document.getElementById('successToast');
+    const applicationForm = document.querySelector('#newAppModal form');
+
+    // Modal toggle function
+    function toggleModal() {
+        modal.classList.toggle('hidden');
+        modal.classList.toggle('flex');
+    }
+
+    // Close modal when clicking outside the content area
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) toggleModal();
+    });
+
+    // Show Toast
+    function showToast() {
+        successToast.classList.remove('translate-y-20', 'opacity-0');
+        successToast.classList.add('translate-y-0', 'opacity-100');
+        setTimeout(() => {
+            successToast.classList.add('translate-y-20', 'opacity-0');
+            successToast.classList.remove('translate-y-0', 'opacity-100');
+        }, 3000);
+    }
+
+    // Form submission mock
+    applicationForm.onsubmit = (e) => {
+        e.preventDefault();
+        toggleModal();
+        showToast();
+        applicationForm.reset();
+    };
+
+    // Search logic
+    searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        tableRows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(term) ? '' : 'none';
+        });
+    });
+
+    // Filter logic
+    function setActiveFilter(activeBtn, otherBtn, filterText) {
+        activeBtn.classList.add('bg-primary', 'text-on-primary');
+        activeBtn.classList.remove('hover:bg-surface-container-high');
+        otherBtn.classList.remove('bg-primary', 'text-on-primary');
+        otherBtn.classList.add('hover:bg-surface-container-high');
+
+        tableRows.forEach(row => {
+            if (!filterText) {
+                row.style.display = '';
+            } else {
+                const status = row.querySelector('td:nth-child(4)').textContent.trim().toLowerCase();
+                row.style.display = status.includes(filterText.toLowerCase()) ? '' : 'none';
+            }
+        });
+    }
+
+    filterAll.onclick = () => setActiveFilter(filterAll, filterInterviews, null);
+    filterInterviews.onclick = () => setActiveFilter(filterInterviews, filterAll, 'interviewing');
+</script><div class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/60 backdrop-blur-sm" id="newAppModal">
+<div class="bg-surface-container-low border border-outline-variant rounded-xl w-full max-w-md p-lg shadow-2xl mx-4">
+<div class="flex justify-between items-center mb-lg">
+<h3 class="text-h3 font-h3 text-on-surface">New Application</h3>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors" id="closeModalBtn" onclick="toggleModal()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form class="flex flex-col gap-md">
+<div class="flex flex-col gap-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">COMPANY</label>
+<input class="bg-surface border border-outline-variant rounded-lg p-sm text-body-base text-on-surface focus:ring-2 focus:ring-primary focus:border-primary w-full outline-none" placeholder="e.g. Google" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">ROLE</label>
+<input class="bg-surface border border-outline-variant rounded-lg p-sm text-body-base text-on-surface focus:ring-2 focus:ring-primary focus:border-primary w-full outline-none" placeholder="e.g. Frontend Intern" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-md md:flex-row">
+<div class="flex-1 flex flex-col gap-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">DATE</label>
+<input class="bg-surface border border-outline-variant rounded-lg p-sm text-body-base text-on-surface focus:ring-2 focus:ring-primary focus:border-primary w-full outline-none" required="" type="date"/>
+</div>
+<div class="flex-1 flex flex-col gap-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">STATUS</label>
+<select class="bg-surface border border-outline-variant rounded-lg p-sm text-body-base focus:ring-2 focus:ring-primary focus:border-primary w-full text-on-surface outline-none cursor-pointer">
+<option>Applied</option>
+<option>Interviewing</option>
+<option>Offer</option>
+<option>Rejected</option>
+</select>
+</div>
+</div>
+<button class="mt-md bg-primary text-on-primary py-md rounded-lg font-bold hover:opacity-90 transition-opacity" type="submit">
+                ADD APPLICATION
+            </button>
+</form>
+</div>
+</div><div class="fixed bottom-lg right-lg bg-secondary-container text-on-secondary-container px-lg py-md rounded-xl shadow-2xl flex items-center gap-md transform translate-y-20 opacity-0 transition-all duration-300 z-[110]" id="successToast">
+<span class="material-symbols-outlined">check_circle</span>
+<span class="font-body-base">Application successfully added to your tracker!</span>
+</div></body></html>

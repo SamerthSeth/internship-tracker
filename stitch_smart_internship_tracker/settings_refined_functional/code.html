@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InternTrack Pro - Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#d8e2ff",
+                        "outline-variant": "#414754",
+                        "tertiary-container": "#ca4e00",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "surface-dim": "#10131b",
+                        "on-background": "#e0e2ed",
+                        "error-container": "#93000a",
+                        "inverse-primary": "#0059c5",
+                        "surface-variant": "#32353d",
+                        "on-surface": "#e0e2ed",
+                        "on-error": "#690005",
+                        "inverse-on-surface": "#2d3039",
+                        "inverse-surface": "#e0e2ed",
+                        "secondary": "#dbb8ff",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#581e00",
+                        "on-tertiary-container": "#fffeff",
+                        "surface-container": "#1c1f27",
+                        "on-secondary-fixed-variant": "#6600b7",
+                        "surface-tint": "#aec6ff",
+                        "surface-container-high": "#272a32",
+                        "on-primary": "#002e6b",
+                        "surface-container-highest": "#32353d",
+                        "on-secondary-fixed": "#2b0052",
+                        "surface-container-lowest": "#0b0e15",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "primary-fixed-dim": "#aec6ff",
+                        "primary": "#aec6ff",
+                        "on-primary-fixed-variant": "#004397",
+                        "on-secondary-container": "#d0a6ff",
+                        "tertiary-fixed": "#ffdbcd",
+                        "background": "#10131b",
+                        "surface-container-low": "#181b23",
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed": "#efdbff",
+                        "secondary-fixed-dim": "#dbb8ff",
+                        "outline": "#8b90a0",
+                        "on-tertiary-fixed": "#360f00",
+                        "tertiary": "#ffb596",
+                        "primary-container": "#0070f3",
+                        "on-primary-container": "#ffffff",
+                        "secondary-container": "#6807ba",
+                        "on-primary-fixed": "#001a43",
+                        "on-surface-variant": "#c1c6d7",
+                        "on-secondary": "#470083",
+                        "surface-bright": "#363942",
+                        "surface": "#10131b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "3xl": "64px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "2xl": "48px",
+                        "xl": "32px"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .toggle-switch[data-active="true"] .toggle-dot { transform: translateX(18px); }
+        .toggle-switch[data-active="true"] { background-color: #aec6ff; }
+        #success-toast { transform: translateY(100px); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        #success-toast.show { transform: translateY(0); opacity: 1; }
+        .nav-link.active { background-color: #272a32; color: #aec6ff; font-weight: 700; }
+        input:focus { box-shadow: 0 0 0 2px rgba(174, 198, 255, 0.2); }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<!-- Success Toast -->
+<div class="fixed bottom-lg right-lg z-[100] bg-surface-container-highest border border-primary/20 px-lg py-md rounded-xl flex items-center gap-md shadow-2xl pointer-events-none opacity-0" id="success-toast">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle">check_circle</span>
+<span class="text-sm font-semibold text-on-surface">Settings saved successfully</span>
+</div>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-surface border-r border-outline-variant flex flex-col gap-sm p-md z-50">
+<div class="mb-xl px-md">
+<h1 class="text-2xl font-black text-primary tracking-tight">InternTrack Pro</h1>
+<p class="text-[11px] font-semibold uppercase tracking-wider text-on-surface-variant mt-xs opacity-70">Management Suite</p>
+</div>
+<nav class="flex flex-col gap-xs flex-1">
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-low hover:text-primary rounded-lg transition-all text-[13px] font-semibold uppercase tracking-wider group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-low hover:text-primary rounded-lg transition-all text-[13px] font-semibold uppercase tracking-wider group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="workspace_premium">workspace_premium</span>
+                Certificates
+            </a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-low hover:text-primary rounded-lg transition-all text-[13px] font-semibold uppercase tracking-wider group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="assignment">assignment</span>
+                Internships
+            </a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-low hover:text-primary rounded-lg transition-all text-[13px] font-semibold uppercase tracking-wider group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="folder_shared">folder_shared</span>
+                Document Vault
+            </a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container-low hover:text-primary rounded-lg transition-all text-[13px] font-semibold uppercase tracking-wider group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="verified">verified</span>
+                Eligibility
+            </a>
+<a class="nav-link active flex items-center gap-md px-md py-sm rounded-lg transition-all text-[13px] font-semibold uppercase tracking-wider duration-200 mt-auto" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-[260px] flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="sticky top-0 bg-surface/80 backdrop-blur-md border-b border-outline-variant h-[64px] flex justify-between items-center w-full px-xl z-40">
+<div class="flex items-center gap-xl">
+<span class="text-xl font-bold text-on-surface">Settings</span>
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px] opacity-60">search</span>
+<input class="bg-surface-container-low border border-outline-variant/30 rounded-lg pl-[36px] pr-md py-[6px] text-sm w-72 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Search preferences..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-[22px]" data-icon="notifications">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant cursor-pointer hover:border-primary/50 transition-colors">
+<img alt="User profile photo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfbcRvTV26HZV3OJnijGrq61iCHoP2EUhvplkMWomSdzZ8KIPNq8PewjZ5HS9bRQcU7IM8Zhtc7bIXTHy-LrZuipmTAx0MZi7fn49oHfoogVtY6mhGlVIJGadQEjYRzD3Q_gAKLlKHWNle68swyHT3ojfO9SEKoYtFSoe4VEVMoVooBEf2pxzXx44Lu4_cY-GmckQQ0IPPmfPKr4q3A7GAFhoyKpC8BBpYvNDriUdi-uUySTKLoUAnPlP1QjV36pMDxWVddCeWBoc"/>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="flex-1 p-xl max-w-6xl mx-auto w-full">
+<div class="flex flex-col lg:flex-row gap-xl">
+<!-- Settings Tabs - Two column layout left side -->
+<nav class="lg:w-64 flex flex-col gap-xs shrink-0 lg:sticky lg:top-[88px] h-fit">
+<p class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-xs px-md opacity-60">General</p>
+<a class="tab-link active flex items-center justify-between px-md py-sm rounded-lg bg-surface-container-high text-primary font-semibold text-sm transition-all" href="#profile" onclick="switchTab(this, 'profile')">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="account_circle">account_circle</span>
+                            Account
+                        </div>
+<span class="material-symbols-outlined text-[16px] opacity-0 group-hover:opacity-100" data-icon="chevron_right">chevron_right</span>
+</a>
+<a class="tab-link flex items-center justify-between px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low text-sm transition-all group" href="#security" onclick="switchTab(this, 'security')">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-[18px] group-hover:text-primary transition-colors" data-icon="security">security</span>
+                            Security
+                        </div>
+</a>
+<a class="tab-link flex items-center justify-between px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low text-sm transition-all group" href="#notifications" onclick="switchTab(this, 'notifications')">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-[18px] group-hover:text-primary transition-colors" data-icon="notifications">notifications</span>
+                            Notifications
+                        </div>
+</a>
+<a class="tab-link flex items-center justify-between px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low text-sm transition-all group" href="#appearance" onclick="switchTab(this, 'appearance')">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-[18px] group-hover:text-primary transition-colors" data-icon="palette">palette</span>
+                            Appearance
+                        </div>
+</a>
+</nav>
+<!-- Settings Content - Two column layout right side -->
+<div class="flex-1 max-w-3xl">
+<!-- Profile Section -->
+<section class="section-container" id="profile">
+<div class="mb-xl">
+<h2 class="text-2xl font-bold text-on-surface">Account Profile</h2>
+<p class="text-sm text-on-surface-variant opacity-70 mt-1">Manage your public information and avatar settings.</p>
+</div>
+<div class="bg-surface-container-low border border-outline-variant/30 rounded-2xl overflow-hidden shadow-sm">
+<div class="p-xl border-b border-outline-variant/20 flex flex-col sm:flex-row items-center gap-xl">
+<div class="relative">
+<div class="w-24 h-24 rounded-2xl bg-surface-container-highest overflow-hidden ring-1 ring-outline-variant/50 shadow-inner group transition-all hover:ring-primary/50">
+<img class="w-full h-full object-cover" id="avatar-preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhm2RwRRoK1ZSv8YGwZUB3PgHkMpewZk5IXfJrrRp_u44JxdrHfmJWW5pMm6zbWqkMxKz5ka51YHzAJvKYrzr5ils-QCprkNUnmcVfff6PdE46q74g3JuR87Nku7o2hqpcoTOB3--PZZdFmDSKP3d9k_m7J2RZvNTXcEm9B0w5Lh_PAJlqh6QtqUrOMS6uoaMNPDJglOqYZ6Wki10HrbxhfvxFidTginl6u1iQS9iU1nLzS4qrHZoMyZ4wcU61jY7q8KwHsE4rUlI"/>
+</div>
+<button class="absolute -bottom-2 -right-2 bg-primary text-on-primary w-8 h-8 rounded-full shadow-lg border-4 border-background flex items-center justify-center hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[16px]" data-icon="camera_alt">camera_alt</span>
+</button>
+</div>
+<div class="flex flex-col gap-sm flex-1">
+<h3 class="text-lg font-semibold text-on-surface">Profile Picture</h3>
+<p class="text-[13px] text-on-surface-variant opacity-70">JPG, GIF or PNG. Max size of 800K.</p>
+<div class="flex gap-md mt-1">
+<button class="bg-primary/10 text-primary px-lg py-sm rounded-lg text-[13px] font-bold hover:bg-primary/20 transition-all border border-primary/20">Upload Photo</button>
+<button class="text-on-surface-variant hover:text-error px-lg py-sm rounded-lg text-[13px] font-bold border border-outline-variant hover:border-error/30 transition-all">Remove</button>
+</div>
+</div>
+</div>
+<div class="p-xl grid grid-cols-1 md:grid-cols-2 gap-lg bg-surface-container-lowest/50">
+<div class="flex flex-col gap-xs">
+<label class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Full Name</label>
+<input class="w-full bg-surface-container-low border border-outline-variant/40 rounded-xl px-md py-[10px] text-sm focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all placeholder:opacity-50" type="text" value="Alex Chen"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Email Address</label>
+<input class="w-full bg-surface-container-low border border-outline-variant/40 rounded-xl px-md py-[10px] text-sm focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all placeholder:opacity-50" type="email" value="alex.chen@university.edu"/>
+</div>
+<div class="flex flex-col gap-xs md:col-span-2">
+<label class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Professional Bio</label>
+<textarea class="w-full bg-surface-container-low border border-outline-variant/40 rounded-xl px-md py-[10px] text-sm focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all h-24 resize-none" placeholder="Write a short introduction...">Senior Computer Science Student at State University.</textarea>
+</div>
+</div>
+</div>
+</section>
+<!-- Security Section -->
+<section class="section-container hidden" id="security">
+<div class="mb-xl">
+<h2 class="text-2xl font-bold text-on-surface">Security</h2>
+<p class="text-sm text-on-surface-variant opacity-70 mt-1">Protect your account with a secure password and additional layers.</p>
+</div>
+<div class="bg-surface-container-low border border-outline-variant/30 rounded-2xl p-xl shadow-sm space-y-xl">
+<div class="flex flex-col gap-xs">
+<label class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Current Password</label>
+<input class="w-full bg-surface-container-low border border-outline-variant/40 rounded-xl px-md py-[10px] text-sm focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all" placeholder="••••••••" type="password"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="flex flex-col gap-xs">
+<label class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">New Password</label>
+<input class="w-full bg-surface-container-low border border-outline-variant/40 rounded-xl px-md py-[10px] text-sm focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all" placeholder="At least 8 characters" type="password"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Confirm Password</label>
+<input class="w-full bg-surface-container-low border border-outline-variant/40 rounded-xl px-md py-[10px] text-sm focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all" placeholder="Match new password" type="password"/>
+</div>
+</div>
+<div class="pt-sm border-t border-outline-variant/20 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-lg">
+<div>
+<h4 class="text-sm font-semibold text-on-surface">Two-Factor Authentication</h4>
+<p class="text-xs text-on-surface-variant opacity-70">Add an extra layer of security to your account.</p>
+</div>
+<button class="bg-secondary-container/20 text-secondary border border-secondary/30 px-lg py-sm rounded-lg text-[13px] font-bold hover:bg-secondary-container/30 transition-all">Enable 2FA</button>
+</div>
+</div>
+</section>
+<!-- Notifications Section -->
+<section class="section-container hidden" id="notifications">
+<div class="mb-xl">
+<h2 class="text-2xl font-bold text-on-surface">Notifications</h2>
+<p class="text-sm text-on-surface-variant opacity-70 mt-1">Control how you receive updates and alerts.</p>
+</div>
+<div class="space-y-sm">
+<div class="group flex items-center justify-between p-lg bg-surface-container-low border border-outline-variant/30 rounded-2xl hover:bg-surface-container-high transition-all shadow-sm">
+<div class="flex items-center gap-lg">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+</div>
+<div>
+<p class="font-semibold text-on-surface">Email Alerts</p>
+<p class="text-xs text-on-surface-variant opacity-70">Receive digests and deadline reminders.</p>
+</div>
+</div>
+<button class="toggle-switch w-10 h-[22px] bg-surface-container-highest rounded-full relative flex items-center px-[2px] transition-colors duration-200" data-active="true" onclick="toggleSwitch(this)">
+<div class="toggle-dot w-4 h-4 bg-white rounded-full transition-transform duration-200 shadow-sm"></div>
+</button>
+</div>
+<div class="group flex items-center justify-between p-lg bg-surface-container-low border border-outline-variant/30 rounded-2xl hover:bg-surface-container-high transition-all shadow-sm">
+<div class="flex items-center gap-lg">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+</div>
+<div>
+<p class="font-semibold text-on-surface">Push Notifications</p>
+<p class="text-xs text-on-surface-variant opacity-70">Real-time status changes in your browser.</p>
+</div>
+</div>
+<button class="toggle-switch w-10 h-[22px] bg-surface-container-highest rounded-full relative flex items-center px-[2px] transition-colors duration-200" data-active="false" onclick="toggleSwitch(this)">
+<div class="toggle-dot w-4 h-4 bg-white rounded-full transition-transform duration-200 shadow-sm"></div>
+</button>
+</div>
+<div class="group flex items-center justify-between p-lg bg-surface-container-low border border-outline-variant/30 rounded-2xl hover:bg-surface-container-high transition-all shadow-sm">
+<div class="flex items-center gap-lg">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="sms">sms</span>
+</div>
+<div>
+<p class="font-semibold text-on-surface">SMS Notifications</p>
+<p class="text-xs text-on-surface-variant opacity-70">Urgent interview requests and security codes.</p>
+</div>
+</div>
+<button class="toggle-switch w-10 h-[22px] bg-surface-container-highest rounded-full relative flex items-center px-[2px] transition-colors duration-200" data-active="false" onclick="toggleSwitch(this)">
+<div class="toggle-dot w-4 h-4 bg-white rounded-full transition-transform duration-200 shadow-sm"></div>
+</button>
+</div>
+</div>
+</section>
+<!-- Appearance Section -->
+<section class="section-container hidden" id="appearance">
+<div class="mb-xl">
+<h2 class="text-2xl font-bold text-on-surface">Appearance</h2>
+<p class="text-sm text-on-surface-variant opacity-70 mt-1">Customize your workspace visual experience.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-lg">
+<button class="theme-card relative border border-outline-variant/30 rounded-2xl p-4 flex flex-col gap-4 bg-white transition-all hover:ring-2 hover:ring-primary/20 text-left overflow-hidden group" id="theme-light" onclick="setTheme('light')">
+<div class="w-full h-32 bg-slate-50 rounded-xl border border-outline-variant/10 p-3 flex flex-col gap-3 pointer-events-none group-hover:bg-slate-100 transition-colors">
+<div class="flex gap-2">
+<div class="w-10 h-2 bg-blue-500/20 rounded"></div>
+<div class="w-14 h-2 bg-slate-300 rounded"></div>
+</div>
+<div class="flex-1 bg-white rounded-lg border border-slate-200 shadow-sm"></div>
+</div>
+<div class="flex items-center justify-between px-1">
+<div>
+<p class="text-sm font-bold text-slate-900">Light Mode</p>
+<p class="text-[11px] text-slate-500">Soft and high contrast</p>
+</div>
+<span class="material-symbols-outlined text-slate-300 text-[24px] check-icon" data-icon="circle">circle</span>
+</div>
+</button>
+<button class="theme-card relative border-2 border-primary rounded-2xl p-4 flex flex-col gap-4 bg-surface-container-low transition-all hover:ring-2 hover:ring-primary/20 text-left overflow-hidden group" id="theme-dark" onclick="setTheme('dark')">
+<div class="w-full h-32 bg-surface-dim rounded-xl border border-outline-variant/20 p-3 flex flex-col gap-3 pointer-events-none group-hover:bg-surface-container-low transition-colors">
+<div class="flex gap-2">
+<div class="w-10 h-2 bg-primary/30 rounded"></div>
+<div class="w-14 h-2 bg-surface-container-highest rounded"></div>
+</div>
+<div class="flex-1 bg-surface-container-lowest rounded-lg border border-outline-variant/10 shadow-sm"></div>
+</div>
+<div class="flex items-center justify-between px-1">
+<div>
+<p class="text-sm font-bold text-on-surface">Dark Mode</p>
+<p class="text-[11px] text-on-surface-variant opacity-60">Easy on the eyes</p>
+</div>
+<span class="material-symbols-outlined text-primary text-[24px] check-icon" data-icon="check_circle">check_circle</span>
+</div>
+</button>
+</div>
+</section>
+<!-- Footer Action -->
+<div class="mt-2xl pt-xl border-t border-outline-variant/30 flex flex-col sm:flex-row justify-between items-center gap-lg pb-3xl">
+<div class="flex items-center gap-sm text-on-surface-variant opacity-60">
+<span class="material-symbols-outlined text-[16px]" data-icon="history">history</span>
+<p class="text-xs">Last saved: 2 hours ago</p>
+</div>
+<div class="flex gap-md w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-xl py-sm rounded-xl border border-outline-variant font-bold text-[13px] text-on-surface-variant hover:bg-surface-container-low active:scale-95 transition-all" onclick="if(confirm('Discard unsaved changes?')) window.location.reload();">Cancel</button>
+<button class="flex-1 sm:flex-none px-[32px] py-sm rounded-xl bg-primary text-on-primary font-bold text-[13px] shadow-lg shadow-primary/20 hover:brightness-110 active:scale-95 transition-all" onclick="saveAllSettings()">Save Changes</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        function toggleSwitch(el) {
+            const isActive = el.getAttribute('data-active') === 'true';
+            el.setAttribute('data-active', (!isActive).toString());
+        }
+
+        function setTheme(theme) {
+            const lightCard = document.getElementById('theme-light');
+            const darkCard = document.getElementById('theme-dark');
+            
+            if (theme === 'light') {
+                lightCard.classList.replace('border', 'border-2');
+                lightCard.classList.add('border-primary');
+                lightCard.querySelector('.check-icon').innerText = 'check_circle';
+                lightCard.querySelector('.check-icon').classList.replace('text-slate-300', 'text-blue-600');
+
+                darkCard.classList.replace('border-2', 'border');
+                darkCard.classList.remove('border-primary');
+                darkCard.querySelector('.check-icon').innerText = 'circle';
+                darkCard.querySelector('.check-icon').classList.replace('text-primary', 'text-on-surface-variant');
+                document.documentElement.classList.remove('dark');
+            } else {
+                darkCard.classList.replace('border', 'border-2');
+                darkCard.classList.add('border-primary');
+                darkCard.querySelector('.check-icon').innerText = 'check_circle';
+                darkCard.querySelector('.check-icon').classList.replace('text-on-surface-variant', 'text-primary');
+
+                lightCard.classList.replace('border-2', 'border');
+                lightCard.classList.remove('border-primary');
+                lightCard.querySelector('.check-icon').innerText = 'circle';
+                lightCard.querySelector('.check-icon').classList.replace('text-blue-600', 'text-slate-300');
+                document.documentElement.classList.add('dark');
+            }
+        }
+
+        function saveAllSettings() {
+            const toast = document.getElementById('success-toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function switchTab(el, targetId) {
+            // Update Tab Links
+            document.querySelectorAll('.tab-link').forEach(link => {
+                link.classList.remove('bg-surface-container-high', 'text-primary', 'font-semibold');
+                link.classList.add('text-on-surface-variant', 'hover:bg-surface-container-low');
+            });
+            el.classList.add('bg-surface-container-high', 'text-primary', 'font-semibold');
+            el.classList.remove('text-on-surface-variant', 'hover:bg-surface-container-low');
+
+            // Toggle Sections
+            document.querySelectorAll('section.section-container').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(targetId).classList.remove('hidden');
+        }
+
+        // Handle initial hash if present
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) {
+                const targetLink = Array.from(document.querySelectorAll('.tab-link')).find(l => l.getAttribute('href') === '#' + hash);
+                if (targetLink) switchTab(targetLink, hash);
+            }
+        });
+    </script>
+</body></html>

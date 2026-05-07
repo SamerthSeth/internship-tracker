@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Internship & Certificate Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(90deg, #1e293b 0%, #0f172a 100%);
+            border-bottom: 2px solid #fbbf24;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            background: #0f172a;
+            border-color: #fbbf24;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(251, 191, 36, 0.2);
+        }
+        
+        .card h3 {
+            color: #fbbf24;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .status-healthy {
+            background: rgba(34, 197, 94, 0.2);
+            color: #86efac;
+        }
+        
+        .btn {
+            background: #fbbf24;
+            color: #0f172a;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #f59e0b;
+            transform: scale(1.05);
+        }
+        
+        .btn-secondary {
+            background: #334155;
+            color: #e2e8f0;
+        }
+        
+        .btn-secondary:hover {
+            background: #475569;
+        }
+        
+        .section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: #1e293b;
+            border-radius: 12px;
+            border: 1px solid #334155;
+        }
+        
+        .endpoint {
+            background: #0f172a;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            border-left: 4px solid #fbbf24;
+        }
+        
+        .endpoint p {
+            margin: 0.5rem 0;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+        
+        .method-get { color: #3b82f6; font-weight: bold; }
+        .method-post { color: #8b5cf6; font-weight: bold; }
+        .method-put { color: #f59e0b; font-weight: bold; }
+        .method-delete { color: #ef4444; font-weight: bold; }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #334155;
+            border-top-color: #fbbf24;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: #1e293b;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid #334155;
+        }
+        
+        .input-group {
+            margin: 1rem 0;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #fbbf24;
+            font-weight: 500;
+        }
+        
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 0.75rem;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: #e2e8f0;
+        }
+        
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #fbbf24;
+            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1 style="font-size: 2.5rem; color: #fbbf24; margin-bottom: 0.5rem;">
+                ✨ Smart Internship & Certificate Tracker
+            </h1>
+            <p style="color: #cbd5e1;">Production-ready backend with complete API documentation</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- API Status -->
+        <div class="section">
+            <h2 style="color: #fbbf24; margin-bottom: 1rem;">API Status</h2>
+            <div id="api-status" style="display: flex; gap: 1rem; align-items: center;">
+                <div class="loading"></div>
+                <span>Checking API health...</span>
+            </div>
+        </div>
+
+        <!-- Main Features -->
+        <div class="grid">
+            <div class="card" onclick="openModal('auth-modal')">
+                <h3>🔐 Authentication</h3>
+                <p>Sign up, login, and manage JWT tokens</p>
+                <button class="btn" style="width: 100%; margin-top: 1rem;">Get Started</button>
+            </div>
+            
+            <div class="card" onclick="openModal('certs-modal')">
+                <h3>📜 Certificates</h3>
+                <p>View, create, and manage your certificates</p>
+                <button class="btn" style="width: 100%; margin-top: 1rem;">Explore</button>
+            </div>
+            
+            <div class="card" onclick="openModal('internships-modal')">
+                <h3>💼 Internships</h3>
+                <p>Track your internship experiences</p>
+                <button class="btn" style="width: 100%; margin-top: 1rem;">View</button>
+            </div>
+        </div>
+
+        <!-- API Endpoints -->
+        <div class="section">
+            <h2 style="color: #fbbf24; margin-bottom: 1rem;">Available API Endpoints</h2>
+            
+            <div style="margin-top: 1.5rem;">
+                <h4 style="color: #cbd5e1; margin: 1rem 0 0.5rem 0;">Health & Root</h4>
+                <div class="endpoint">
+                    <p><span class="method-get">GET</span> /health</p>
+                    <p style="color: #94a3b8;">Check API health status</p>
+                </div>
+                <div class="endpoint">
+                    <p><span class="method-get">GET</span> /</p>
+                    <p style="color: #94a3b8;">Get API information</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 1.5rem;">
+                <h4 style="color: #cbd5e1; margin: 1rem 0 0.5rem 0;">Authentication</h4>
+                <div class="endpoint">
+                    <p><span class="method-post">POST</span> /auth/signup</p>
+                    <p style="color: #94a3b8;">Register a new user</p>
+                </div>
+                <div class="endpoint">
+                    <p><span class="method-post">POST</span> /auth/login</p>
+                    <p style="color: #94a3b8;">Login with email and password</p>
+                </div>
+                <div class="endpoint">
+                    <p><span class="method-post">POST</span> /auth/refresh</p>
+                    <p style="color: #94a3b8;">Refresh access token</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 1.5rem;">
+                <h4 style="color: #cbd5e1; margin: 1rem 0 0.5rem 0;">Certificates</h4>
+                <div class="endpoint">
+                    <p><span class="method-get">GET</span> /certificates</p>
+                    <p style="color: #94a3b8;">List all certificates (requires auth)</p>
+                </div>
+                <div class="endpoint">
+                    <p><span class="method-post">POST</span> /certificates</p>
+                    <p style="color: #94a3b8;">Create new certificate (requires auth)</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 1.5rem;">
+                <h4 style="color: #cbd5e1; margin: 1rem 0 0.5rem 0;">Dashboard</h4>
+                <div class="endpoint">
+                    <p><span class="method-get">GET</span> /dashboard/stats</p>
+                    <p style="color: #94a3b8;">Get dashboard statistics (requires auth)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Documentation Links -->
+        <div class="section" style="text-align: center;">
+            <h2 style="color: #fbbf24; margin-bottom: 1.5rem;">📚 Documentation</h2>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="http://localhost:8000/api/docs" target="_blank" class="btn">
+                    📖 Swagger UI (Interactive)
+                </a>
+                <a href="http://localhost:8000/api/redoc" target="_blank" class="btn btn-secondary">
+                    📄 ReDoc (Beautiful Docs)
+                </a>
+                <a href="http://localhost:8000/api/openapi.json" target="_blank" class="btn btn-secondary">
+                    ⚙️ OpenAPI Schema
+                </a>
+            </div>
+        </div>
+
+        <!-- Sample Users -->
+        <div class="section">
+            <h2 style="color: #fbbf24; margin-bottom: 1rem;">🔑 Sample Login Credentials</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <div style="background: #0f172a; padding: 1rem; border-radius: 6px; border-left: 4px solid #22c55e;">
+                    <p style="color: #86efac; font-weight: bold;">User 1</p>
+                    <p style="font-family: monospace; font-size: 0.875rem;">
+                        Email: john@example.com<br>
+                        Password: john_dev
+                    </p>
+                </div>
+                <div style="background: #0f172a; padding: 1rem; border-radius: 6px; border-left: 4px solid #22c55e;">
+                    <p style="color: #86efac; font-weight: bold;">User 2</p>
+                    <p style="font-family: monospace; font-size: 0.875rem;">
+                        Email: jane@example.com<br>
+                        Password: jane_coder
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals (placeholders for future interactivity) -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: #fbbf24; margin-bottom: 1.5rem;">🔐 Authentication</h2>
+            <p>Use the Swagger UI at <strong>/api/docs</strong> to test authentication endpoints</p>
+            <button class="btn" onclick="closeModal('auth-modal')" style="width: 100%; margin-top: 1.5rem;">Close</button>
+        </div>
+    </div>
+
+    <div id="certs-modal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: #fbbf24; margin-bottom: 1.5rem;">📜 Certificates API</h2>
+            <p>Manage certificates through the interactive API documentation</p>
+            <button class="btn" onclick="closeModal('certs-modal')" style="width: 100%; margin-top: 1.5rem;">Close</button>
+        </div>
+    </div>
+
+    <div id="internships-modal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: #fbbf24; margin-bottom: 1.5rem;">💼 Internships API</h2>
+            <p>Track internship experiences through the API</p>
+            <button class="btn" onclick="closeModal('internships-modal')" style="width: 100%; margin-top: 1.5rem;">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Check API health on page load
+        async function checkApiHealth() {
+            try {
+                const response = await axios.get('/health');
+                document.getElementById('api-status').innerHTML = `
+                    <div class="status-badge status-healthy">✅ API Healthy</div>
+                    <span>Backend running on v${response.data.version}</span>
+                `;
+            } catch (error) {
+                document.getElementById('api-status').innerHTML = `
+                    <div class="status-badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">
+                        ⚠️ API Error
+                    </div>
+                    <span>${error.message}</span>
+                `;
+            }
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+
+        // Run health check when page loads
+        window.addEventListener('load', checkApiHealth);
+    </script>
+</body>
+</html>

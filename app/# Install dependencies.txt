@@ -1,0 +1,15 @@
+# Install dependencies
+pip install -r requirements.txt
+
+# Configure environment
+cp .env.example .env
+# Update DATABASE_URL in .env
+
+# Initialize database
+python init_db.py
+
+# Seed sample data (optional)
+python seed_db.py
+
+# Run server
+python -m uvicorn app.main:app --reload

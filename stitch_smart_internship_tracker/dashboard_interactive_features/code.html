@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html class="light dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InternTrack Pro - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"inverse-primary": "#0059c5", "on-secondary-fixed": "#2b0052", "on-secondary-container": "#d0a6ff", tertiary: "#ffb596", "outline-variant": "#414754", "secondary-fixed": "#efdbff", "on-primary-fixed-variant": "#004397", "surface-container-lowest": "#0b0e15", "on-surface": "#e0e2ed", error: "#ffb4ab", "primary-fixed-dim": "#aec6ff", "surface-container-low": "#181b23", "on-primary-container": "#ffffff", "surface-dim": "#10131b", primary: "#aec6ff", "on-background": "#e0e2ed", background: "#10131b", surface: "#10131b", "tertiary-fixed": "#ffdbcd", "error-container": "#93000a", "secondary-container": "#6807ba", "on-secondary": "#470083", secondary: "#dbb8ff", "inverse-surface": "#e0e2ed", "surface-container-high": "#272a32", "on-secondary-fixed-variant": "#6600b7", "on-tertiary": "#581e00", "on-error-container": "#ffdad6", "on-tertiary-fixed": "#360f00", "surface-tint": "#aec6ff", "primary-container": "#0070f3", "on-error": "#690005", "primary-fixed": "#d8e2ff", "on-surface-variant": "#c1c6d7", "tertiary-fixed-dim": "#ffb596", "on-tertiary-fixed-variant": "#7d2d00", "surface-bright": "#363942", "inverse-on-surface": "#2d3039", "tertiary-container": "#ca4e00", "secondary-fixed-dim": "#dbb8ff", "on-primary-fixed": "#001a43", "surface-container-highest": "#32353d", "on-primary": "#002e6b", "surface-variant": "#32353d", "surface-container": "#1c1f27", "on-tertiary-container": "#fffeff", outline: "#8b90a0"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {sm: "8px", "2xl": "48px", xl: "32px", xs: "4px", lg: "24px", "3xl": "64px", md: "16px"}, fontFamily: {"label-caps": ["Inter"], h2: ["Inter"], h3: ["Inter"], "body-base": ["Inter"], "body-sm": ["Inter"], h1: ["Inter"], code: ["monospace"]}, fontSize: {"label-caps": ["11px", {lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600"}], h2: ["24px", {lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "600"}], h3: ["18px", {lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "600"}], "body-base": ["14px", {lineHeight: "1.6", letterSpacing: "0em", fontWeight: "400"}], "body-sm": ["13px", {lineHeight: "1.5", letterSpacing: "0em", fontWeight: "400"}], h1: ["32px", {lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "600"}], code: ["13px", {lineHeight: "1.4", letterSpacing: "0em", fontWeight: "400"}]}}}};</script>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #e0e2ed; border-radius: 10px; }
+  </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[240px] bg-surface border-r border-outline-variant flex flex-col gap-sm p-md h-screen z-50">
+<div class="mb-xl px-md">
+<h1 class="font-h2 text-h2 font-black text-primary">InternTrack Pro</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant opacity-70">Management Suite</p>
+</div>
+<nav class="flex flex-col gap-xs flex-1">
+<a class="text-primary font-bold bg-surface-container-high rounded-xl px-md py-sm flex items-center gap-md transition-transform duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="text-on-surface-variant px-md py-sm flex items-center gap-md hover:bg-surface-container-low rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="workspace_premium">workspace_premium</span>
+<span class="font-label-caps text-label-caps">Certificate Manager</span>
+</a>
+<a class="text-on-surface-variant px-md py-sm flex items-center gap-md hover:bg-surface-container-low rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="font-label-caps text-label-caps">Internship Tracker</span>
+</a>
+<a class="text-on-surface-variant px-md py-sm flex items-center gap-md hover:bg-surface-container-low rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+<span class="font-label-caps text-label-caps">Document Vault</span>
+</a>
+<a class="text-on-surface-variant px-md py-sm flex items-center gap-md hover:bg-surface-container-low rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+<span class="font-label-caps text-label-caps">Eligibility Checker</span>
+</a>
+<div class="mt-auto">
+<a class="text-on-surface-variant px-md py-sm flex items-center gap-md hover:bg-surface-container-low rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</div>
+</nav>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="ml-[240px] flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface border-b border-outline-variant sticky top-0 z-40">
+<div class="flex justify-between items-center w-full px-lg h-[64px] max-w-[1440px] mx-auto">
+<div class="flex items-center flex-1">
+<div class="relative w-full max-w-md group">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary">search</span>
+<input class="bg-surface-container-low border-none rounded-xl pl-xl pr-md py-xs w-full font-body-sm text-body-sm focus:ring-2 focus:ring-primary transition-all" placeholder="Search internships or documents..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-sm text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="flex items-center gap-sm pl-md border-l border-outline-variant">
+<img alt="User profile photo" class="w-8 h-8 rounded-full object-cover" data-alt="Close-up studio portrait of a young professional male in his mid-20s, looking directly at the camera with a confident, neutral expression. The lighting is soft and high-key, highlighting clean features and a minimalist aesthetic. The background is a solid, light neutral gray, maintaining the professional and utilitarian mood of the InternTrack Pro platform. The overall image quality is sharp and high-resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJtQOScSoLwdtaMeqptJ4NECKY-q1bZLJAQ1U_UVC2HNhHFZAOMPLn6ui5kha4gFxc8YLiknzlQ-jN_ErHR-H-aeBFPpwK6OICr1ww40sY9EIUjT7M6YzdlwHXg7oXqehR0MJmQjtrMWWXClLwv8Z9jcwYentQcIY_xqqEADkF20tMWsgcxq25vwL3sggyU_b8BBIT4F5VY2ofBw-fYmP-bf99-PNNRGVhg7m-3xvnb2yn7vStctaIJb42zMFX1QA0HFa-YBV2D3I"/>
+<span class="font-body-base text-body-base font-bold text-on-surface">Alex Rivera</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Scrollable Canvas -->
+<main class="p-lg max-w-[1440px] mx-auto w-full flex-1">
+<!-- Page Header -->
+<div class="mb-xl flex justify-between items-end">
+<div>
+<h2 class="font-h1 text-h1 font-bold text-on-surface tracking-tight">Performance Dashboard</h2>
+<p class="font-body-base text-body-base text-on-surface-variant">Review your progress and manage ongoing internship applications.</p>
+</div>
+<button class="bg-primary text-on-primary px-md py-sm rounded-xl font-label-caps text-label-caps flex items-center gap-sm hover:opacity-90 transition-opacity shadow-sm" onclick="openModal()">
+<span class="material-symbols-outlined" data-icon="add" style="font-size: 18px;">add</span>
+          New Application
+        </button>
+</div>
+<!-- Stats Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg mb-xl">
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-xl">
+<div class="flex justify-between items-start mb-sm">
+<div class="bg-primary-fixed p-sm rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="workspace_premium" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<span class="text-tertiary font-label-caps text-label-caps">+2 this month</span>
+</div>
+<p class="text-on-surface-variant font-label-caps text-label-caps">Total Certificates</p>
+<p class="font-h1 text-h1 font-bold text-on-surface">12</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-xl">
+<div class="flex justify-between items-start mb-sm">
+<div class="bg-secondary-fixed p-sm rounded-lg text-secondary">
+<span class="material-symbols-outlined" data-icon="business_center" style="font-variation-settings: 'FILL' 1;">business_center</span>
+</div>
+<span class="text-secondary font-label-caps text-label-caps">On Track</span>
+</div>
+<p class="text-on-surface-variant font-label-caps text-label-caps">Active Internships</p>
+<p class="font-h1 text-h1 font-bold text-on-surface">2</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-xl">
+<div class="flex justify-between items-start mb-sm">
+<div class="bg-error-container p-sm rounded-lg text-error">
+<span class="material-symbols-outlined" data-icon="event_busy" style="font-variation-settings: 'FILL' 1;">event_busy</span>
+</div>
+<span class="text-error font-label-caps text-label-caps">Urgent</span>
+</div>
+<p class="text-on-surface-variant font-label-caps text-label-caps">Upcoming Deadlines</p>
+<p class="font-h1 text-h1 font-bold text-on-surface">3</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-xl">
+<div class="flex justify-between items-start mb-sm">
+<div class="bg-tertiary-fixed p-sm rounded-lg text-tertiary">
+<span class="material-symbols-outlined" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<span class="text-tertiary font-label-caps text-label-caps">Excellent</span>
+</div>
+<p class="text-on-surface-variant font-label-caps text-label-caps">Completion Rate</p>
+<p class="font-h1 text-h1 font-bold text-on-surface">85%</p>
+</div>
+</section>
+<!-- Bento Layout Content Area -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Left Column (2/3 width) -->
+<div class="lg:col-span-2 flex flex-col gap-lg">
+<!-- Timeline Bar Chart Section -->
+<div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl flex flex-col">
+<div class="flex justify-between items-center mb-lg">
+<h3 class="font-h3 text-h3 font-bold text-on-surface">6-Month Progress Timeline</h3>
+<div class="flex gap-sm">
+<button class="p-xs bg-surface-container-high rounded border border-outline-variant"><span class="material-symbols-outlined text-[18px]">more_horiz</span></button>
+</div>
+</div>
+<div class="flex items-end justify-between h-[200px] pt-md px-md">
+<div class="flex flex-col items-center gap-sm group">
+<div class="flex items-end gap-[2px] h-[150px]">
+<div class="w-4 bg-primary-container rounded-t-sm h-[40%] transition-all"></div>
+<div class="w-4 bg-secondary-container opacity-50 rounded-t-sm h-[20%] transition-all"></div>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Jan</span>
+</div>
+<div class="flex flex-col items-center gap-sm group">
+<div class="flex items-end gap-[2px] h-[150px]">
+<div class="w-4 bg-primary-container rounded-t-sm h-[60%] transition-all"></div>
+<div class="w-4 bg-secondary-container opacity-50 rounded-t-sm h-[35%] transition-all"></div>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Feb</span>
+</div>
+<div class="flex flex-col items-center gap-sm group">
+<div class="flex items-end gap-[2px] h-[150px]">
+<div class="w-4 bg-primary-container rounded-t-sm h-[30%] transition-all"></div>
+<div class="w-4 bg-secondary-container opacity-50 rounded-t-sm h-[15%] transition-all"></div>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Mar</span>
+</div>
+<div class="flex flex-col items-center gap-sm group">
+<div class="flex items-end gap-[2px] h-[150px]">
+<div class="w-4 bg-primary-container rounded-t-sm h-[85%] transition-all"></div>
+<div class="w-4 bg-secondary-container opacity-50 rounded-t-sm h-[50%] transition-all"></div>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Apr</span>
+</div>
+<div class="flex flex-col items-center gap-sm group">
+<div class="flex items-end gap-[2px] h-[150px]">
+<div class="w-4 bg-primary-container rounded-t-sm h-[75%] transition-all"></div>
+<div class="w-4 bg-secondary-container opacity-50 rounded-t-sm h-[45%] transition-all"></div>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">May</span>
+</div>
+<div class="flex flex-col items-center gap-sm group">
+<div class="flex items-end gap-[2px] h-[150px]">
+<div class="w-4 bg-primary-container rounded-t-sm h-[95%] transition-all"></div>
+<div class="w-4 bg-secondary-container opacity-50 rounded-t-sm h-[70%] transition-all"></div>
+</div>
+<span class="font-label-caps text-label-caps font-bold text-secondary">Jun</span>
+</div></div>
+</div>
+<!-- Pie Chart & Stats Row -->
+<div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="flex flex-col justify-center">
+<h3 class="font-h3 text-h3 font-bold text-on-surface mb-xs">Certificates by Category</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-lg">Visual breakdown of your credential ecosystem.</p>
+<div class="space-y-md">
+<div class="flex items-center gap-md">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<div class="flex-1">
+<div class="flex justify-between mb-1">
+<span class="font-label-caps text-label-caps text-on-surface">Software Eng</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">45%</span>
+</div>
+<div class="h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[45%]"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<div class="flex-1">
+<div class="flex justify-between mb-1">
+<span class="font-label-caps text-label-caps text-on-surface">Design &amp; UX</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">30%</span>
+</div>
+<div class="h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[30%]"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-3 h-3 rounded-full bg-tertiary"></div>
+<div class="flex-1">
+<div class="flex justify-between mb-1">
+<span class="font-label-caps text-label-caps text-on-surface">Data Analysis</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">25%</span>
+</div>
+<div class="h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[25%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Decorative Visual for Pie Chart -->
+<div class="flex items-center justify-center relative py-md">
+<div class="w-48 h-48 rounded-full border-[12px] border-primary flex items-center justify-center relative">
+<div class="absolute inset-0 rounded-full border-[12px] border-secondary border-t-transparent border-l-transparent border-r-transparent -rotate-45 scale-105"></div>
+<div class="absolute inset-0 rounded-full border-[12px] border-tertiary border-t-transparent border-l-transparent -rotate-[120deg] scale-110"></div>
+<div class="text-center">
+<p class="font-h2 text-h2 font-black text-on-surface">12</p>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Total</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (1/3 width) -->
+<div class="flex flex-col">
+<div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl h-full flex flex-col">
+<div class="flex justify-between items-center mb-lg">
+<h3 class="font-h3 text-h3 font-bold text-on-surface">Recent Activity</h3>
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 20px;">history</span>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar space-y-lg pr-sm">
+<!-- Activity Item -->
+<div class="flex gap-md relative">
+<div class="absolute left-4 top-10 bottom-[-24px] w-px bg-outline-variant"></div>
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-primary flex items-center justify-center flex-shrink-0 z-10">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">upload</span>
+</div>
+<div>
+<p class="font-body-base text-body-base text-on-surface font-bold">Uploaded Google UX Certificate</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Professional Design Track • Specialized Credential</p>
+<span class="font-label-caps text-label-caps text-on-surface-variant opacity-60 mt-xs block">2 hours ago</span>
+</div>
+</div>
+<!-- Activity Item -->
+<div class="flex gap-md relative">
+<div class="absolute left-4 top-10 bottom-[-24px] w-px bg-outline-variant"></div>
+<div class="w-8 h-8 rounded-full bg-secondary-fixed text-secondary flex items-center justify-center flex-shrink-0 z-10">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">send</span>
+</div>
+<div>
+<p class="font-body-base text-body-base text-on-surface font-bold">Application submitted to Vercel</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Frontend Engineering Intern • Fall 2024</p>
+<span class="font-label-caps text-label-caps text-on-surface-variant opacity-60 mt-xs block">5 hours ago</span>
+</div>
+</div>
+<!-- Activity Item -->
+<div class="flex gap-md relative">
+<div class="absolute left-4 top-10 bottom-[-24px] w-px bg-outline-variant"></div>
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed text-tertiary flex items-center justify-center flex-shrink-0 z-10">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="font-body-base text-body-base text-on-surface font-bold">Milestone Completed</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Interview Preparation • Stripe Technical Prep</p>
+<span class="font-label-caps text-label-caps text-on-surface-variant opacity-60 mt-xs block">Yesterday</span>
+</div>
+</div>
+<!-- Activity Item -->
+<div class="flex gap-md relative">
+<div class="absolute left-4 top-10 bottom-0 w-px bg-outline-variant"></div>
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-primary flex items-center justify-center flex-shrink-0 z-10">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">grade</span>
+</div>
+<div>
+<p class="font-body-base text-body-base text-on-surface font-bold">New Badge Earned</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Consistency Streak • 30 Days of Tracking</p>
+<span class="font-label-caps text-label-caps text-on-surface-variant opacity-60 mt-xs block">Jun 12, 2024</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-lg border border-outline-variant py-sm rounded-xl font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container-low transition-colors">
+              View All Activity
+            </button>
+</div>
+</div>
+</div>
+<!-- Bottom Task Grid (Optional Addition for UX depth) -->
+<div class="mt-lg grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl flex items-center gap-lg">
+<div class="w-16 h-16 bg-primary-container/20 rounded-xl flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary text-[32px]" data-icon="lightbulb">lightbulb</span>
+</div>
+<div>
+<h4 class="font-h3 text-h3 font-bold text-on-surface">Career Insight</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Based on your software certificates, you are 85% ready for Junior React roles.</p>
+<a class="text-primary font-label-caps text-label-caps font-bold mt-sm inline-block hover:underline" href="#">Explore Roadmap</a>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl flex items-center gap-lg">
+<div class="w-16 h-16 bg-secondary-container/20 rounded-xl flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-secondary text-[32px]" data-icon="security">security</span>
+</div>
+<div>
+<h4 class="font-h3 text-h3 font-bold text-on-surface">Privacy Audit</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Your documents are encrypted and shared only with verified recruiters.</p>
+<a class="text-secondary font-label-caps text-label-caps font-bold mt-sm inline-block hover:underline" href="#">Review Access</a>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- New Application Modal -->
+<div class="fixed inset-0 z-[100] hidden" id="applicationModal">
+<div class="absolute inset-0 bg-background/80 backdrop-blur-sm" onclick="closeModal()"></div>
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-surface-container border border-outline-variant p-lg rounded-xl shadow-2xl">
+<div class="flex justify-between items-center mb-lg">
+<h3 class="font-h3 text-h3 font-bold text-on-surface">New Internship Application</h3>
+<button class="p-xs hover:bg-surface-container-high rounded-full" onclick="closeModal()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form class="space-y-md">
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-xs">Company Name</label>
+<input class="w-full bg-surface-container-low border-outline-variant rounded-lg text-body-sm focus:ring-primary focus:border-primary text-on-surface" placeholder="e.g. Google, Vercel, Stripe" type="text"/>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-xs">Role Title</label>
+<input class="w-full bg-surface-container-low border-outline-variant rounded-lg text-body-sm focus:ring-primary focus:border-primary text-on-surface" placeholder="e.g. Frontend Engineering Intern" type="text"/>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-xs">Initial Status</label>
+<select class="w-full bg-surface-container-low border-outline-variant rounded-lg text-body-sm focus:ring-primary focus:border-primary text-on-surface">
+<option>Draft</option>
+<option>Applied</option>
+<option>Interviewing</option>
+<option>Offer</option>
+</select>
+</div>
+<div class="pt-md flex gap-md">
+<button class="flex-1 py-sm border border-outline-variant rounded-xl font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container-high" onclick="closeModal()" type="button">Cancel</button>
+<button class="flex-1 py-sm bg-primary text-on-primary rounded-xl font-label-caps text-label-caps hover:opacity-90 transition-opacity shadow-sm" type="submit">Create Application</button>
+</div>
+</form>
+</div>
+</div>
+<script>
+  function openModal() {
+    document.getElementById('applicationModal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('applicationModal').classList.add('hidden');
+    document.body.style.overflow = 'auto';
+  }
+</script></body></html>

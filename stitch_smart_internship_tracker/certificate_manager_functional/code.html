@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html class="light dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Certificate Manager | InternTrack Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"inverse-primary": "#0059c5", "on-secondary-fixed": "#2b0052", "on-secondary-container": "#d0a6ff", tertiary: "#ffb596", "outline-variant": "#414754", "secondary-fixed": "#efdbff", "on-primary-fixed-variant": "#004397", "surface-container-lowest": "#0b0e15", "on-surface": "#e0e2ed", error: "#ffb4ab", "primary-fixed-dim": "#aec6ff", "surface-container-low": "#181b23", "on-primary-container": "#ffffff", "surface-dim": "#10131b", primary: "#aec6ff", "on-background": "#e0e2ed", background: "#10131b", surface: "#10131b", "tertiary-fixed": "#ffdbcd", "error-container": "#93000a", "secondary-container": "#6807ba", "on-secondary": "#470083", secondary: "#dbb8ff", "inverse-surface": "#e0e2ed", "surface-container-high": "#272a32", "on-secondary-fixed-variant": "#6600b7", "on-tertiary": "#581e00", "on-error-container": "#ffdad6", "on-tertiary-fixed": "#360f00", "surface-tint": "#aec6ff", "primary-container": "#0070f3", "on-error": "#690005", "primary-fixed": "#d8e2ff", "on-surface-variant": "#c1c6d7", "tertiary-fixed-dim": "#ffb596", "on-tertiary-fixed-variant": "#7d2d00", "surface-bright": "#363942", "inverse-on-surface": "#2d3039", "tertiary-container": "#ca4e00", "secondary-fixed-dim": "#dbb8ff", "on-primary-fixed": "#001a43", "surface-container-highest": "#32353d", "on-primary": "#002e6b", "surface-variant": "#32353d", "surface-container": "#1c1f27", "on-tertiary-container": "#fffeff", outline: "#8b90a0"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {sm: "8px", "2xl": "48px", xl: "32px", xs: "4px", lg: "24px", "3xl": "64px", md: "16px"}, fontFamily: {"label-caps": ["Inter"], h2: ["Inter"], h3: ["Inter"], "body-base": ["Inter"], "body-sm": ["Inter"], h1: ["Inter"], code: ["monospace"]}, fontSize: {"label-caps": ["11px", {lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600"}], h2: ["24px", {lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "600"}], h3: ["18px", {lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "600"}], "body-base": ["14px", {lineHeight: "1.6", letterSpacing: "0em", fontWeight: "400"}], "body-sm": ["13px", {lineHeight: "1.5", letterSpacing: "0em", fontWeight: "400"}], h1: ["32px", {lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "600"}], code: ["13px", {lineHeight: "1.4", letterSpacing: "0em", fontWeight: "400"}]}}}};</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #faf9ff;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full w-[240px] bg-surface border-r border-outline-variant flex flex-col gap-sm p-md h-screen">
+<div class="mb-lg px-md">
+<h2 class="font-h2 text-h2 font-black text-primary">InternTrack Pro</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant opacity-70 uppercase tracking-widest">Management Suite</p>
+</div>
+<nav class="flex flex-col gap-xs flex-1">
+<a class="text-on-surface-variant px-md py-sm hover:bg-surface-container-low rounded-xl transition-all flex items-center gap-md" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="text-primary font-bold bg-surface-container-high rounded-xl px-md py-sm flex items-center gap-md transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="workspace_premium" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="font-label-caps text-label-caps">Certificate Manager</span>
+</a>
+<a class="text-on-surface-variant px-md py-sm hover:bg-surface-container-low rounded-xl transition-all flex items-center gap-md" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="font-label-caps text-label-caps">Internship Tracker</span>
+</a>
+<a class="text-on-surface-variant px-md py-sm hover:bg-surface-container-low rounded-xl transition-all flex items-center gap-md" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+<span class="font-label-caps text-label-caps">Document Vault</span>
+</a>
+<a class="text-on-surface-variant px-md py-sm hover:bg-surface-container-low rounded-xl transition-all flex items-center gap-md" href="#">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+<span class="font-label-caps text-label-caps">Eligibility Checker</span>
+</a>
+<div class="mt-auto pt-lg border-t border-outline-variant">
+<a class="text-on-surface-variant px-md py-sm hover:bg-surface-container-low rounded-xl transition-all flex items-center gap-md" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</div>
+</nav>
+</aside>
+<!-- Top Navigation Bar -->
+<header class="ml-[240px] sticky top-0 z-10 bg-surface border-b border-outline-variant">
+<div class="flex justify-between items-center w-full px-lg h-md max-w-[1440px] mx-auto h-[64px]">
+<div class="flex items-center gap-lg">
+<span class="font-h3 text-h3 font-bold text-primary">InternTrack Pro</span>
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]" data-icon="search">search</span>
+<input class="bg-surface-container-low border border-outline-variant rounded-xl pl-[44px] pr-md py-xs font-body-sm text-body-sm w-[300px] focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Search certificates..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-sm hover:bg-surface-container-high rounded-full transition-colors relative">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="h-[32px] w-[32px] rounded-full overflow-hidden border border-outline-variant">
+<img alt="User profile photo" data-alt="A professional headshot of a young adult student for a corporate profile, set against a soft, neutral-toned studio background. The lighting is flattering and high-key, using soft-box techniques to create a clean, modern aesthetic. The subject is wearing business casual attire, conveying a sense of competence and readiness for a professional internship environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBe6Km2jEmZhu8-sAQGNI1iYv5n9fA2EuKRna51moHrCZfG2fktqUH4LMLMJjI9ezCaElN_yIBJAaCS4HRYuRM_pf2b3FukVTPvm7aacP0Zy0ATrGc6CJrDCPvoOQEcCS-6FMPj4ZrjSN97RMR-2S2QY1yD188IYrjZSmihWHYx0fhVmWHGJM8LC5MK4BaGPvMPnQMyP28uv3jfMrV1bZdCfSXf-kgJkr07HdA--xDsW_WigvgZZ08kuZou061OoJ0MdOzmaD59Mk"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[240px] p-lg max-w-[1440px] mx-auto">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-xl">
+<div>
+<h1 class="font-h1 text-h1 text-on-surface mb-xs">Certificate Manager</h1>
+<p class="font-body-base text-body-base text-on-surface-variant">Centralize and verify your professional achievements and course completions.</p>
+</div>
+<button class="bg-primary hover:bg-primary-container text-on-primary font-body-base text-body-base px-lg py-sm rounded-xl flex items-center gap-sm transition-all shadow-sm active:scale-95" onclick="document.getElementById('add-certificate-modal').classList.remove('hidden')">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                Add New Certificate
+            </button>
+</div>
+<!-- Filter Bar -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md mb-lg flex flex-wrap items-center gap-md">
+<div class="flex-1 min-w-[280px] relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]" data-icon="filter_list">filter_list</span>
+<input class="w-full bg-surface border border-outline-variant rounded-lg pl-[40px] pr-md py-sm font-body-sm text-body-sm focus:ring-1 focus:ring-primary focus:border-primary outline-none" placeholder="Filter by name or keyword..." type="text"/>
+</div>
+<div class="w-[200px]">
+<select class="w-full bg-surface border border-outline-variant rounded-lg px-md py-sm font-body-sm text-body-sm focus:ring-1 focus:ring-primary focus:border-primary outline-none">
+<option value="">All Categories</option>
+<option value="tech">Technical Skills</option>
+<option value="soft">Soft Skills</option>
+<option value="mgmt">Management</option>
+<option value="lang">Language</option>
+</select>
+</div>
+<button class="flex items-center gap-xs px-md py-sm border border-outline-variant rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="sort">sort</span>
+                Sort
+            </button>
+</div>
+<!-- Table Container -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="px-lg py-md font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Title &amp; Verification</th>
+<th class="px-lg py-md font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Platform</th>
+<th class="px-lg py-md font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Category</th>
+<th class="px-lg py-md font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Date Issued</th>
+<th class="px-lg py-md font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+</div>
+<div>
+<p class="font-body-base text-body-base font-bold text-on-surface">Advanced React Patterns</p>
+<p class="font-body-sm text-body-sm text-secondary flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                        Verified Credential
+                                    </p>
+</div>
+</div>
+</td>
+<td class="px-lg py-md">
+<span class="font-body-base text-body-base text-on-surface-variant">Coursera</span>
+</td>
+<td class="px-lg py-md">
+<span class="inline-flex items-center px-sm py-xs rounded bg-primary/10 text-primary font-label-caps text-[10px] font-bold uppercase">Software Engineering</span>
+</td>
+<td class="px-lg py-md font-body-base text-body-base text-on-surface-variant">
+                            Oct 12, 2023
+                        </td>
+<td class="px-lg py-md text-right">
+<div class="flex justify-end gap-sm group-hover:opacity-100 transition-opacity opacity-100"><button class="p-xs text-on-surface-variant hover:text-primary transition-colors" title="View">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-primary transition-colors" title="Download">
+<span class="material-symbols-outlined">download</span>
+</button></div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+</div>
+<div>
+<p class="font-body-base text-body-base font-bold text-on-surface">Strategic Leadership Foundations</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Manual Upload</p>
+</div>
+</div>
+</td>
+<td class="px-lg py-md">
+<span class="font-body-base text-body-base text-on-surface-variant">LinkedIn Learning</span>
+</td>
+<td class="px-lg py-md">
+<span class="inline-flex items-center px-sm py-xs rounded bg-secondary/10 text-secondary font-label-caps text-[10px] font-bold uppercase">Management</span>
+</td>
+<td class="px-lg py-md font-body-base text-body-base text-on-surface-variant">
+                            Aug 05, 2023
+                        </td>
+<td class="px-lg py-md text-right">
+<div class="flex justify-end gap-sm group-hover:opacity-100 transition-opacity opacity-100"><button class="p-xs text-on-surface-variant hover:text-primary transition-colors" title="View">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-primary transition-colors" title="Download">
+<span class="material-symbols-outlined">download</span>
+</button></div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="brush">brush</span>
+</div>
+<div>
+<p class="font-body-base text-body-base font-bold text-on-surface">UI/UX Design Masterclass</p>
+<p class="font-body-sm text-body-sm text-secondary flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                        Verified Credential
+                                    </p>
+</div>
+</div>
+</td>
+<td class="px-lg py-md">
+<span class="font-body-base text-body-base text-on-surface-variant">Udemy</span>
+</td>
+<td class="px-lg py-md">
+<span class="inline-flex items-center px-sm py-xs rounded bg-tertiary/10 text-tertiary font-label-caps text-[10px] font-bold uppercase">Design</span>
+</td>
+<td class="px-lg py-md font-body-base text-body-base text-on-surface-variant">
+                            Jan 20, 2024
+                        </td>
+<td class="px-lg py-md text-right">
+<div class="flex justify-end gap-sm group-hover:opacity-100 transition-opacity opacity-100"><button class="p-xs text-on-surface-variant hover:text-primary transition-colors" title="View">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-primary transition-colors" title="Download">
+<span class="material-symbols-outlined">download</span>
+</button></div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Empty State Illustration Placeholder (Only shown if no results) -->
+<div class="hidden flex-col items-center justify-center py-[100px] text-center px-xl">
+<div class="w-[200px] mb-lg opacity-40">
+<img alt="Empty search results" data-alt="A minimalist, stylized vector illustration of a document folder with a magnifying glass hovering over it, symbolizing a search with no results found. The design uses a clean, monochromatic blue-and-white color scheme consistent with a professional dashboard UI. The background is a flat, light surface, maintaining a focused and utilitarian atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSE6kCEXcZAV2oii7RXtbs9iLBz_FeTtNFjE2ytrZwXOn1uACzFaAShnOlhmEr_aNqusmDxyRgHpGlj5BQA0-daWKcwFS3LjyHHvjXEpan_27jJGaESqkOt51A56bcJKKM7OHrDuEq_U3zoTGqzlfq966vs1Djq5nD_BCmpI3c0MZI6z6aiFIO-PWRDgp4V2XqWrLiWeyxBeaiWP37O22Tu2-dwHfDBAAK88JaF89He_lFOnRmSr38v_mTUs1aXOr6Lh_Cy1n8FDo"/>
+</div>
+<h3 class="font-h3 text-h3 text-on-surface mb-xs">No certificates found</h3>
+<p class="font-body-base text-body-base text-on-surface-variant max-w-[400px]">We couldn't find any certificates matching your current search or filters. Try adjusting your criteria or add a new record.</p>
+<button class="mt-lg text-primary font-bold hover:underline flex items-center gap-xs">
+                    Clear all filters
+                </button>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-lg flex items-center justify-between">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Showing 1 to 3 of 12 certificates</p>
+<div class="flex items-center gap-xs">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-high text-on-surface-variant disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined text-[18px]" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-on-primary font-label-caps text-label-caps">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-high text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Contextual FAB -->
+<button class="fixed bottom-xl right-xl w-[56px] h-[56px] bg-secondary-container text-on-secondary shadow-lg rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[28px]" data-icon="upload" style="font-variation-settings: 'FILL' 1;">upload</span>
+</button>
+<div class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/50 backdrop-blur-sm" id="add-certificate-modal">
+<div class="bg-surface-container shadow-2xl rounded-2xl w-full max-w-[500px] border border-outline-variant overflow-hidden">
+<div class="px-lg py-md border-b border-outline-variant flex justify-between items-center bg-surface-container-high">
+<h3 class="font-h3 text-h3 text-on-surface">Add New Certificate</h3>
+<button class="p-xs hover:bg-surface-container-highest rounded-full text-on-surface-variant transition-colors" onclick="document.getElementById('add-certificate-modal').classList.add('hidden')">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-lg space-y-md">
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Certificate Title</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-xl px-md py-sm font-body-sm text-on-surface focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="e.g. Advanced React Patterns" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Platform</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-xl px-md py-sm font-body-sm text-on-surface focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="e.g. Coursera, Udemy" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Category</label>
+<select class="w-full bg-surface-container-low border border-outline-variant rounded-xl px-md py-sm font-body-sm text-on-surface focus:ring-2 focus:ring-primary outline-none transition-all">
+<option>Technical Skills</option>
+<option>Soft Skills</option>
+<option>Management</option>
+<option>Design</option>
+</select>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Date Issued</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-xl px-md py-sm font-body-sm text-on-surface focus:ring-2 focus:ring-primary outline-none transition-all" type="date"/>
+</div>
+</div>
+</div>
+<div class="px-lg py-md border-t border-outline-variant bg-surface-container-low flex justify-end gap-md">
+<button class="px-lg py-sm font-body-base text-on-surface-variant hover:text-on-surface transition-colors" onclick="document.getElementById('add-certificate-modal').classList.add('hidden')">Cancel</button>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-xl font-bold hover:bg-primary-container transition-all active:scale-95" onclick="document.getElementById('add-certificate-modal').classList.add('hidden')">Save Certificate</button>
+</div>
+</div>
+</div></body></html>

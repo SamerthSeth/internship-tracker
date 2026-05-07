@@ -248,6 +248,50 @@ The API uses consistent error responses:
 }
 ```
 
+## Deployment
+
+### Vercel Deployment
+
+The application is configured for deployment on Vercel:
+
+1. **Install Vercel CLI**
+   ```bash
+   npm install -g vercel
+   ```
+
+2. **Deploy to Vercel**
+   ```bash
+   vercel
+   ```
+
+3. **Set Environment Variables in Vercel Dashboard**
+   - Go to your project in Vercel dashboard
+   - Navigate to Settings > Environment Variables
+   - Add the required environment variables (see Environment Variables section)
+
+4. **Redeploy after environment changes**
+   ```bash
+   vercel --prod
+   ```
+
+**Note**: Vercel uses serverless functions, so SQLite database state won't persist between requests. Consider using a cloud database like PostgreSQL for production.
+
+### Local Docker Deployment
+
+```bash
+# Build the Docker image
+docker build -t tracker-app .
+
+# Run the container
+docker run -p 8000:8000 tracker-app
+
+# Or run with environment variables
+docker run -p 8000:8000 -e DATABASE_URL="sqlite+aiosqlite:///./tracker.db" tracker-app
+```
+
+The API will be available at `http://localhost:8000`
+
+
 Common status codes:
 - `200`: Success
 - `201`: Created
