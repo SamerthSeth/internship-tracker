@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Sidebar from './components/Sidebar';
@@ -47,6 +46,15 @@ const App = () => {
               <Route path="/internships" element={<Internships />} />
             </Route>
           </Route>
+          <Route
+            path="*"
+            element={
+              <Navigate
+                to={localStorage.getItem('access_token') ? '/dashboard' : '/'}
+                replace
+              />
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>

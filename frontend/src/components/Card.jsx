@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Card = ({ title, value, icon, colorClass }) => {
   return (
     <div className="bg-surface-container-lowest border border-outline-variant p-md rounded-xl">

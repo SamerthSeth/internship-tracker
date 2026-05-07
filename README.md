@@ -144,31 +144,31 @@ The API will be available at `http://localhost:8000`
 ## API Endpoints
 
 ### Authentication
-- `POST /auth/signup` - Register new user
-- `POST /auth/login` - Login user
-- `POST /auth/refresh` - Refresh access token
+- `POST /api/auth/signup` - Register new user
+- `POST /api/auth/login` - Login user
+- `POST /api/auth/refresh` - Refresh access token
 
 ### Certificates
-- `GET /certificates` - Get all certificates
-- `GET /certificates/{id}` - Get certificate by ID
-- `POST /certificates` - Create certificate
-- `POST /certificates/upload` - Create certificate with file
-- `PUT /certificates/{id}` - Update certificate
-- `DELETE /certificates/{id}` - Delete certificate
+- `GET /api/certificates` - Get all certificates
+- `GET /api/certificates/{id}` - Get certificate by ID
+- `POST /api/certificates` - Create certificate
+- `POST /api/certificates/upload` - Create certificate with file
+- `PUT /api/certificates/{id}` - Update certificate
+- `DELETE /api/certificates/{id}` - Delete certificate
 
 ### Internships
-- `GET /internships` - Get all internships
-- `GET /internships/active` - Get active internships
-- `GET /internships/{id}` - Get internship by ID
-- `POST /internships` - Create internship
-- `POST /internships/upload` - Create internship with file
-- `PUT /internships/{id}` - Update internship
-- `DELETE /internships/{id}` - Delete internship
+- `GET /api/internships` - Get all internships
+- `GET /api/internships/active` - Get active internships
+- `GET /api/internships/{id}` - Get internship by ID
+- `POST /api/internships` - Create internship
+- `POST /api/internships/upload` - Create internship with file
+- `PUT /api/internships/{id}` - Update internship
+- `DELETE /api/internships/{id}` - Delete internship
 
 ### Dashboard
-- `GET /dashboard/stats` - Get dashboard statistics
-- `GET /dashboard/upcoming-deadlines` - Get upcoming deadlines
-- `GET /dashboard/eligibility` - Check eligibility status
+- `GET /api/dashboard/stats` - Get dashboard statistics
+- `GET /api/dashboard/upcoming-deadlines` - Get upcoming deadlines
+- `GET /api/dashboard/eligibility` - Check eligibility status
 
 ## Environment Variables
 
@@ -193,7 +193,7 @@ ALLOWED_FILE_TYPES=pdf,jpg,jpeg,png
 FILE_UPLOAD_DIRECTORY=uploads
 
 # CORS
-CORS_ORIGINS=["http://localhost:3000","http://localhost:8000"]
+CORS_ORIGINS=["http://localhost:3000","http://localhost:5173","http://localhost:8000"]
 ```
 
 ## Database Migrations
@@ -235,7 +235,7 @@ The API uses JWT (JSON Web Tokens) for authentication:
 Example:
 ```bash
 curl -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
-  http://localhost:8000/certificates
+  http://localhost:8000/api/certificates
 ```
 
 ## Error Handling

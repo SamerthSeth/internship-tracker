@@ -5,10 +5,10 @@ Certificate service - Business logic for certificate operations
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy import and_
-from datetime import date
 from app.models import CertificateModel
 from app.schemas import CertificateCreate, CertificateUpdate
-from app.utils.exceptions import NotFoundException, ForbiddenException
+from app.utils import file_manager
+from app.utils.exceptions import NotFoundException
 from app.utils.helpers import is_date_expired
 
 
@@ -147,6 +147,8 @@ class CertificateService:
         
         # Update file URL if provided
         if file_url:
+            if certificate.file_url:
+                file_manager.delete_file(certificate.file_url)
             certificate.file_url = file_url
         
         # Update expiry status
@@ -176,6 +178,9 @@ class CertificateService:
         certificate = await CertificateService.get_certificate_by_id(
             db, certificate_id, user_id
         )
+
+        if certificate.file_url:
+            file_manager.delete_file(certificate.file_url)
         
         await db.delete(certificate)
         await db.commit()

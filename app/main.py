@@ -1,29 +1,24 @@
-"""
-FastAPI application entry point
-Main application with CORS, event handlers, and routes
-"""
+"""FastAPI application entry point."""
 
-import os
-import sys
 from contextlib import asynccontextmanager
+from pathlib import Path
 
-# Add project root to sys.path for direct script execution
-ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if ROOT_DIR not in sys.path:
-    sys.path.insert(0, ROOT_DIR)
-
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 
-from app.core import init_db, engine, settings
-from app.routes import auth, certificates, internships, dashboard
+from app.core import engine, init_db, settings
+from app.routes import auth, certificates, dashboard, internships
 
-# Resolve runtime directories from project root for reliable serverless paths
-UPLOADS_DIR = os.path.join(ROOT_DIR, "uploads")
-STATIC_DIR = os.path.join(ROOT_DIR, "static")
-os.makedirs(UPLOADS_DIR, exist_ok=True)
+ROOT_DIR = Path(__file__).resolve().parent.parent
+FRONTEND_DIST_DIR = ROOT_DIR / "frontend" / "dist"
+LEGACY_STATIC_DIR = ROOT_DIR / "static"
+
+uploads_dir = Path(settings.FILE_UPLOAD_DIRECTORY)
+if not uploads_dir.is_absolute():
+    uploads_dir = ROOT_DIR / uploads_dir
+uploads_dir.mkdir(parents=True, exist_ok=True)
 
 # Lifespan context manager for startup/shutdown events
 @asynccontextmanager
@@ -71,12 +66,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount static files for uploads
-app.mount("/uploads", StaticFiles(directory=UPLOADS_DIR), name="uploads")
-
-# Mount static files for frontend
-if os.path.isdir(STATIC_DIR):
-    app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+app.mount("/uploads", StaticFiles(directory=uploads_dir), name="uploads")
 
 # Include routers
 app.include_router(auth.router, prefix="/api")
@@ -102,15 +92,23 @@ async def health_check():
     }
 
 
-# Root endpoint
-@app.get("/", tags=["Root"])
+def _frontend_index_path() -> Path | None:
+    """Return the best available frontend index path."""
+    dist_index = FRONTEND_DIST_DIR / "index.html"
+    if dist_index.exists():
+        return dist_index
+    legacy_index = LEGACY_STATIC_DIR / "index.html"
+    if legacy_index.exists():
+        return legacy_index
+    return None
+
+
+@app.get("/", include_in_schema=False)
 async def root():
-    """
-    Root endpoint with API information
-    
-    Returns:
-        API information
-    """
+    """Serve frontend index when available, otherwise API metadata."""
+    index_path = _frontend_index_path()
+    if index_path:
+        return FileResponse(index_path)
     return {
         "app": settings.APP_NAME,
         "version": "1.0.0",
@@ -119,31 +117,32 @@ async def root():
     }
 
 
-# Serve frontend dashboard
-@app.get("/dashboard", tags=["Frontend"])
-async def dashboard_page():
+@app.get("/{full_path:path}", include_in_schema=False)
+async def spa_fallback(full_path: str):
     """
-    Serve the frontend dashboard HTML page
-    
-    Returns:
-        HTML dashboard page
+    Serve frontend static files and SPA routes for non-API paths.
     """
-    dashboard_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "static", "index.html")
-    if os.path.exists(dashboard_path):
-        return FileResponse(dashboard_path)
-    return {"error": "Dashboard not found", "path": dashboard_path, "exists": os.path.exists(dashboard_path), "cwd": os.getcwd()}
+    if (
+        full_path == "health"
+        or full_path.startswith("health/")
+        or full_path.startswith(("api/", "uploads/"))
+    ):
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Not Found")
 
+    if FRONTEND_DIST_DIR.exists():
+        requested_file = (FRONTEND_DIST_DIR / full_path).resolve()
+        if (
+            FRONTEND_DIST_DIR.resolve() in requested_file.parents
+            and requested_file.exists()
+            and requested_file.is_file()
+        ):
+            return FileResponse(requested_file)
 
-# Debug: list all registered routes (temporary)
-@app.get("/_routes", tags=["Debug"])
-async def _list_routes():
-    """Return registered routes for debugging"""
-    routes = []
-    for r in app.routes:
-        path = getattr(r, "path", None) or getattr(r, "prefix", None) or str(r)
-        methods = list(getattr(r, "methods", [])) if hasattr(r, "methods") else []
-        routes.append({"path": path, "methods": methods})
-    return routes
+    index_path = _frontend_index_path()
+    if index_path:
+        return FileResponse(index_path)
+
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Not Found")
 
 
 if __name__ == "__main__":
@@ -151,9 +150,9 @@ if __name__ == "__main__":
     
     uvicorn.run(
         app,
-        host="127.0.0.1",
-        port=8001,
-        reload=False,
+        host="0.0.0.0",
+        port=8000,
+        reload=True,
         log_level="info",
     )
 

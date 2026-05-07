@@ -2,12 +2,13 @@
 File upload utilities with local storage abstraction
 """
 
-import os
 import secrets
 from pathlib import Path
 from typing import Optional
 from fastapi import UploadFile, HTTPException, status
 from app.core.config import settings
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 
 
 class FileUploadManager:
@@ -15,10 +16,15 @@ class FileUploadManager:
     
     def __init__(self):
         """Initialize file manager"""
-        self.upload_dir = Path(settings.FILE_UPLOAD_DIRECTORY)
-        self.upload_dir.mkdir(exist_ok=True)
+        configured_dir = Path(settings.FILE_UPLOAD_DIRECTORY)
+        self.upload_dir = configured_dir if configured_dir.is_absolute() else PROJECT_ROOT / configured_dir
+        self.upload_dir.mkdir(parents=True, exist_ok=True)
         self.max_file_size = settings.MAX_FILE_SIZE
-        self.allowed_types = set(settings.ALLOWED_FILE_TYPES.split(","))
+        self.allowed_types = {
+            file_type.strip().lower()
+            for file_type in settings.ALLOWED_FILE_TYPES.split(",")
+            if file_type.strip()
+        }
     
     def get_file_extension(self, filename: str) -> str:
         """
@@ -77,7 +83,7 @@ class FileUploadManager:
             # Create subdirectory if specified
             if subdirectory:
                 target_dir = self.upload_dir / subdirectory
-                target_dir.mkdir(exist_ok=True)
+                target_dir.mkdir(parents=True, exist_ok=True)
             else:
                 target_dir = self.upload_dir
             
@@ -92,8 +98,8 @@ class FileUploadManager:
             with open(file_path, "wb") as f:
                 f.write(contents)
             
-            # Return relative path for storage in DB
-            return str(file_path).replace("\\", "/")
+            # Return a path relative to the upload directory for DB storage
+            return str(file_path.relative_to(self.upload_dir)).replace("\\", "/")
         
         except HTTPException:
             raise
@@ -114,7 +120,10 @@ class FileUploadManager:
             True if deleted successfully
         """
         try:
-            full_path = Path(file_path)
+            normalized = file_path.replace("\\", "/").lstrip("/")
+            if normalized.startswith("uploads/"):
+                normalized = normalized[len("uploads/") :]
+            full_path = self.upload_dir / normalized
             if full_path.exists():
                 full_path.unlink()
                 return True
@@ -132,7 +141,7 @@ class FileUploadManager:
         Returns:
             File URL for access
         """
-        return f"/files/{file_path}"
+        return f"/uploads/{file_path.lstrip('/')}"
 
 
 # Global instance

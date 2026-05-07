@@ -11,7 +11,7 @@ from app.core import get_db, create_access_token, create_refresh_token, decode_t
 from app.core.config import settings
 from app.schemas import UserCreate, UserLogin, TokenResponse, TokenRefreshRequest
 from app.services import UserService
-from app.utils.exceptions import UnauthorizedException, DuplicateException
+from app.utils.exceptions import UnauthorizedException, DuplicateException, NotFoundException
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
@@ -79,10 +79,10 @@ async def login(credentials: UserLogin, db: AsyncSession = Depends(get_db)):
             access_token=access_token,
             refresh_token=refresh_token
         )
-    except UnauthorizedException as e:
+    except (UnauthorizedException, NotFoundException):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail=str(e)
+            detail="Invalid email or password"
         )
 
 
@@ -129,7 +129,7 @@ async def refresh_token(request: TokenRefreshRequest, db: AsyncSession = Depends
             access_token=access_token,
             refresh_token=refresh_token
         )
-    except Exception as e:
+    except Exception:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid token"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import api from '../services/api';
 import Card from '../components/Card';
 import toast from 'react-hot-toast';
@@ -7,8 +7,8 @@ const Dashboard = () => {
   const [stats, setStats] = useState({
     total_certificates: 0,
     active_internships: 0,
-    upcoming_deadlines: 0,
-    completion_rate: 0
+    expired_certificates: 0,
+    upcoming_deadlines: 0
   });
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const Dashboard = () => {
       try {
         const response = await api.get('/dashboard/stats');
         setStats(response.data);
-      } catch (error) {
+      } catch {
         toast.error('Failed to fetch dashboard stats');
       }
     };
@@ -52,9 +52,9 @@ const Dashboard = () => {
           colorClass="bg-error-container text-error" 
         />
         <Card 
-          title="Completion Rate" 
-          value={`${stats.completion_rate}%`} 
-          icon="bolt" 
+          title="Expired Certificates" 
+          value={stats.expired_certificates} 
+          icon="warning" 
           colorClass="bg-tertiary-fixed text-tertiary" 
         />
       </section>

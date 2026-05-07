@@ -13,7 +13,7 @@ from app.schemas import (
     EligibilityCheckResponse,
     EligibilityRequirement,
 )
-from app.utils.helpers import get_days_until_date, is_date_expired
+from app.utils.helpers import get_days_until_date
 
 
 class DashboardService:
@@ -126,7 +126,7 @@ class DashboardService:
             select(CertificateModel).where(
                 and_(
                     CertificateModel.user_id == user_id,
-                    CertificateModel.expiry_date != None,
+                    CertificateModel.expiry_date.is_not(None),
                     CertificateModel.expiry_date >= today,
                     CertificateModel.expiry_date <= upcoming_date,
                     CertificateModel.is_expired == False
@@ -151,7 +151,7 @@ class DashboardService:
             select(InternshipModel).where(
                 and_(
                     InternshipModel.user_id == user_id,
-                    InternshipModel.end_date != None,
+                    InternshipModel.end_date.is_not(None),
                     InternshipModel.end_date >= today,
                     InternshipModel.end_date <= upcoming_date,
                     InternshipModel.is_ongoing == True

@@ -96,7 +96,7 @@ async def create_internship_with_file(
     return db_internship
 
 
-@router.get("", response_model=list)
+@router.get("", response_model=list[InternshipResponse])
 async def get_internships(
     skip: int = 0,
     limit: int = 100,
@@ -125,7 +125,7 @@ async def get_internships(
     return internships
 
 
-@router.get("/active", response_model=list)
+@router.get("/active", response_model=list[InternshipResponse])
 async def get_active_internships(
     credentials: HTTPAuthorizationCredentials = Depends(security),
     db: AsyncSession = Depends(get_db)

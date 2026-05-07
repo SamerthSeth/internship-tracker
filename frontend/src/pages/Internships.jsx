@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import api from '../services/api';
 
@@ -16,13 +16,13 @@ const Internships = () => {
     try {
       const response = await api.get('/internships');
       setInternships(response.data);
-    } catch (error) {
+    } catch {
       toast.error('Failed to fetch internships');
     }
   };
 
   useEffect(() => {
-    fetchInternships();
+    void fetchInternships();
   }, []);
 
   const handleAddEntry = async (e) => {
@@ -33,7 +33,7 @@ const Internships = () => {
       setIsModalOpen(false);
       setFormData({ company: '', role: '', start_date: '', is_ongoing: true });
       fetchInternships();
-    } catch (error) {
+    } catch {
       toast.error('Failed to add internship');
     }
   };

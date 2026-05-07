@@ -96,7 +96,7 @@ async def create_certificate_with_file(
     return db_certificate
 
 
-@router.get("", response_model=list)
+@router.get("", response_model=list[CertificateResponse])
 async def get_certificates(
     skip: int = 0,
     limit: int = 100,

@@ -5,9 +5,9 @@ Internship service - Business logic for internship operations
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy import and_
-from datetime import date
 from app.models import InternshipModel
 from app.schemas import InternshipCreate, InternshipUpdate
+from app.utils import file_manager
 from app.utils.exceptions import NotFoundException
 
 
@@ -184,6 +184,8 @@ class InternshipService:
         
         # Update file URL if provided
         if file_url:
+            if internship.file_url:
+                file_manager.delete_file(internship.file_url)
             internship.file_url = file_url
         
         await db.commit()
@@ -210,6 +212,9 @@ class InternshipService:
         internship = await InternshipService.get_internship_by_id(
             db, internship_id, user_id
         )
+
+        if internship.file_url:
+            file_manager.delete_file(internship.file_url)
         
         await db.delete(internship)
         await db.commit()

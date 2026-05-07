@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import api from '../services/api';
 
 const Login = () => {
-  const [email, setEmail] = useState('login@gmail.com');
-  const [password, setPassword] = useState('123456');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -70,7 +70,7 @@ const Login = () => {
               <div className="flex flex-col gap-xs">
                 <div className="flex justify-between items-center px-xs">
                   <label className="font-label-caps text-label-caps text-on-surface-variant" htmlFor="password">Password</label>
-                  <a className="font-label-caps text-label-caps text-primary hover:underline cursor-pointer">Forgot password?</a>
+                  <button type="button" className="font-label-caps text-label-caps text-primary hover:underline">Forgot password?</button>
                 </div>
                 <div className="relative">
                   <span className="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline" style={{ fontSize: '20px' }}>lock</span>
