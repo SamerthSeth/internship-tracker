@@ -20,6 +20,11 @@ from fastapi.responses import FileResponse
 from app.core import init_db, engine, settings
 from app.routes import auth, certificates, internships, dashboard
 
+# Resolve runtime directories from project root for reliable serverless paths
+UPLOADS_DIR = os.path.join(ROOT_DIR, "uploads")
+STATIC_DIR = os.path.join(ROOT_DIR, "static")
+os.makedirs(UPLOADS_DIR, exist_ok=True)
+
 # Lifespan context manager for startup/shutdown events
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -59,10 +64,11 @@ app.add_middleware(
 )
 
 # Mount static files for uploads
-app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
+app.mount("/uploads", StaticFiles(directory=UPLOADS_DIR), name="uploads")
 
 # Mount static files for frontend
-app.mount("/static", StaticFiles(directory="static"), name="static")
+if os.path.isdir(STATIC_DIR):
+    app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 # Include routers
 app.include_router(auth.router, prefix="/api")

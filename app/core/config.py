@@ -3,6 +3,7 @@ Configuration management using Pydantic Settings
 Loads configuration from environment variables
 """
 
+import os
 from pydantic_settings import BaseSettings
 from typing import List
 
@@ -16,7 +17,11 @@ class Settings(BaseSettings):
     ENVIRONMENT: str = "development"
     
     # Database
-    DATABASE_URL: str = "sqlite+aiosqlite:///./tracker.db"
+    DATABASE_URL: str = (
+        "sqlite+aiosqlite:////tmp/tracker.db"
+        if os.getenv("VERCEL") == "1"
+        else "sqlite+aiosqlite:///./tracker.db"
+    )
     
     # JWT Settings
     SECRET_KEY: str = "dev-secret-key-not-for-production-change-this-in-production-must-be-32-chars-minimum"
